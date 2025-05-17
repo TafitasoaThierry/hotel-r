@@ -1,0 +1,52 @@
+@use "./ths.scss";
+
+$px: 8px;
+$tr: all 0.3s;
+
+$color0: #ffffff;
+$color1: #3f3f3f;
+$color2: #1783db;
+
+@font-face {
+    font-family: Roboto;
+    src: url('../assets/fonts/Roboto_Condensed-Medium.ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: fallback;
+}
+
+.auth {
+    @include ths.flex();
+    height: 100vh;
+    gap: 1rem;
+    font-family: Roboto;
+
+    .form {
+        padding: $px * 2;
+        border: 1px solid rgba($color: $color1, $alpha: 0.2);
+        background-color: $color0;
+        border-radius: calc($px / 2);
+        //position: absolute;
+        
+        .form-group {
+            width: 300px;
+            padding: $px;
+            .form-control {
+                width: 100%;
+            }
+        }
+    }
+    .connexion {
+       //z-index: 0;
+    }
+    .creation {
+        //z-index: 1;
+    }
+    input {
+        border-radius: calc($px / 2);
+    }
+    .btn-primary:focus {
+        background-color: $color2;
+        color: $color0;
+    }
+}

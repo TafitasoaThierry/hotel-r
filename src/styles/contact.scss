@@ -1,0 +1,5 @@
+@use "ths.scss";
+
+.contact {
+    @include ths.flex();
+}

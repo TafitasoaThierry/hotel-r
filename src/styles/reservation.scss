@@ -1,0 +1,44 @@
+@use "./ths.scss";
+
+$px: 8px;
+$tr: all 0.3s;
+
+.reservation {
+    @include ths.flex(column, center, center);
+    gap: 1rem;
+    height: 100vh;
+
+    .offres {
+        @include ths.flex();
+        gap: 1rem;
+        flex-wrap: wrap;
+        
+        .box {
+            @include ths.flex(column, center, center);
+            width: 200px;
+            height: 200px;
+            padding: $px;
+            border: 1px solid rgba(0, 0, 0, 0.151);
+            border-radius: $px * 4;
+            transition: $tr;
+        }
+        .box:hover {
+            transform: scale(0.98);
+        }
+    }
+
+    .formulaire {
+        @include ths.flex();
+
+        .row {
+            @include ths.flex();
+            flex-wrap: wrap;
+
+            .col {
+                .form-control {
+                    border-radius: calc($px / 2);
+                }
+            }
+        }
+    }
+}
