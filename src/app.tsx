@@ -56,7 +56,7 @@ export default function App() {
                     <Route path="/" element={ <Accueil setCurrent={ setCurrent } /> } />
                     <Route path="/reservation" element={ <Reservation /> } />
                     <Route path="/contact" element={ <Contact /> } />
-                    <Route path="/auth" element={ <Auth /> } />
+                    <Route path="/auth" element={ <Auth setCurrent={ setCurrent } /> } />
                 </Routes>
                 {/* <div><i className="fa-solid fa-user"></i></div> */}
             </div>

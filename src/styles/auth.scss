@@ -17,7 +17,6 @@ $color2: #1783db;
 
 .auth {
     @include ths.flex();
-    height: 100vh;
     gap: 1rem;
     font-family: Roboto;
 
@@ -25,28 +24,155 @@ $color2: #1783db;
         padding: $px * 2;
         border: 1px solid rgba($color: $color1, $alpha: 0.2);
         background-color: $color0;
-        border-radius: calc($px / 2);
-        //position: absolute;
-        
+        border-radius: $px * 2;
+        color: $color1;
+        box-shadow: 2px 2px 50px 20px rgba($color: $color1, $alpha: 0.2);
+
+        button {
+            background-color: $color0;
+            border: none;
+            transition: $tr;
+        }
+
+        button:hover {
+            transform: scale(0.98);
+            background-color: $color2;
+            color: $color0;
+            padding: 0px $px;
+        }
+
         .form-group {
-            width: 300px;
+            width: 400px;
             padding: $px;
+
+            label {
+                padding: $px $px $px 0px;
+                color: $color1;
+            }
+
             .form-control {
                 width: 100%;
+                border-radius: 0px;
+            }
+
+            .btn-primary:focus {
+                background-color: $color2;
+                color: $color0;
             }
         }
     }
+
     .connexion {
-       //z-index: 0;
+        margin-top: 550px;
+        animation: connex 0.5s;
+        position: absolute;
     }
+
     .creation {
-        //z-index: 1;
+        margin-top: 700px;
+        animation: creation 0.5s;
+        position: absolute;
     }
-    input {
-        border-radius: calc($px / 2);
+    
+    @keyframes connex {
+        from {
+            opacity: 0;
+            margin-right: 50px;
+        }
+        to {
+            opacity: 1;
+            margin-right: -4;
+        }
     }
-    .btn-primary:focus {
-        background-color: $color2;
-        color: $color0;
+
+    @keyframes creation {
+        from {
+            opacity: 0;
+            margin-left: 50px;
+        }
+        to {
+            opacity: 1;
+            margin-left: -4;
+        }
+    }
+
+    .mdp {
+        height: 500px;
+        z-index: 20;
+        padding-top: 50px;
+        padding-bottom: 150px;
+        box-shadow: 50px 50px 80px 500px rgba($color: $color0, $alpha: 1);
+        animation: mdp 0.5s;
+        position: relative;
+        top: 70px;
+        border: 1px solid rgba($color: $color1, $alpha: 0.2);
+
+        .cancel {
+            background-color: $color0;
+            color: $color2;
+            border: 1px solid $color2;
+        }
+        .cancel:hover {
+            background-color: $color0;
+            color: $color2;
+        }
+    }
+
+    @keyframes mdp {
+        from {
+            opacity: 0;
+            top: 0px;
+        }
+        to {
+            opacity: 1;
+            top: 70px;
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+        .form {
+            width: 100%;
+            
+            .form-group {
+                width: 100%;
+                font-size: 14px;
+
+                label {
+                    padding: $px $px $px 0px;
+                    color: $color1;
+                }
+
+                .form-control {
+                    width: 100%;
+                    font-size: 14px;
+                }
+            }
+        }
+        @keyframes connex {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes mdp {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes creation {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     }
 }
