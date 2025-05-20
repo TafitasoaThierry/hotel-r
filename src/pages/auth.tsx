@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import "../styles/auth.scss";
 import Client from "../fetch/client";
-import { Link } from "react-router";
 
-export default function Auth({ setCurrent }: any) {
+export default function Auth({ setCurrent, setDisplayUserStatus}: any) {
     const [showConnexion, setShowConnexion] = useState(true);
 
     if(showConnexion) {
-        return <Connexion setShowConnexion={ setShowConnexion } setCurrent={ setCurrent }/>;
+        return <Connexion setShowConnexion={ setShowConnexion } setCurrent={ setCurrent } setDisplayUserStatus={ setDisplayUserStatus } />;
     }
-    return <Creation setShowConnexion={ setShowConnexion }/>;
+    return <Creation setShowConnexion={ setShowConnexion } />;
 }
 
 function Creation({ setShowConnexion }: any) {
@@ -310,7 +309,7 @@ function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
     }
 }
 
-function Connexion({ setShowConnexion, setCurrent }: any) {
+function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) {
     const [mdp, setMdp] = useState("");
     const [telEmail, setTelEmail] = useState("");
     const [isCorrect, setIsCorrect] = useState({
@@ -318,27 +317,42 @@ function Connexion({ setShowConnexion, setCurrent }: any) {
         mdp: "none"
     });
     const [nope, setNope] = useState("none"); // not in the database
-    const [path, setPath] = useState("?");
-
-    useEffect(() => {
-        connect({mdp, telEmail});
-    }, [path])
 
     const seConnecter = () => {
         const client = new Client();
-        client.obtenirClientByTel(telEmail) // tel
-            .then((r0) => { 
-                if(r0.data != null) {
-                    (r0.data.mdp == mdp) ? r0.data(r0.data) : setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "inline" });
+        client.obtenirClientByTel(telEmail)
+            .then((telFound) => { // if tel entered
+                if(telFound.data.length > 0) {
+                    const data = telFound.data;
+                    for(const elem of data) {
+                        if(elem.mdp == mdp) { // correct mdp with tel entered
+                            // alert("Correct tel");
+                            setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "none" });
+                            connect(elem);
+                            break;
+                        }else {
+                            setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "inline" });
+                        }
+                    }
                     setNope("none");
                 }else {
-                    client.obtenirClientByEmail(telEmail) // email
-                        .then((r1) => {
-                            if(r1.data != null) {
-                                (r1.data.mdp == mdp) ? connect(r1.data) : setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "inline" });
+                    client.obtenirClientByEmail(telEmail)
+                        .then((emailFound) => { // if email entered
+                            if(emailFound.data.length > 0) {
+                                const data = emailFound.data;
+                                for(const elem of data) {
+                                    if(elem.mdp == mdp) { // correct mdp with email entered
+                                        // alert("Correct email")// correct mdp with email entered
+                                        setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "none" });
+                                        connect(elem);
+                                        break;
+                                    }else {
+                                        setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "inline" });
+                                    }
+                                }
                                 setNope("none");
-                            }else {
-                                setIsCorrect({ telEmail: "none", mdp: "none" })
+                            }else { // nope: sady tsy email no tel
+                                setIsCorrect({ telEmail: "none", mdp: "none" }) // no email and no tel
                                 setNope("inline");
                             }
                         })
@@ -347,54 +361,57 @@ function Connexion({ setShowConnexion, setCurrent }: any) {
     }
 
     function checkTelEmail(telEmail: string) {
-        // let correct:string = "";
-        // let n = telEmail.length;
+        let correct:string = "";
+        let n = telEmail.length;
 
-        // for(let i:number = 0; i < n; i++) {
-        //     if((telEmail[i] == telEmail[i + 1]) && (telEmail[i + 1] == ' ')) {
-        //         telEmail = telEmail.replace(telEmail[i], ' ');
-        //     }else{
-        //         correct += telEmail[i];
-        //     }
-        // }
-        setTelEmail(telEmail);
+        for(let i:number = 0; i < n; i++) {
+            if((telEmail[i] == telEmail[i + 1]) && (telEmail[i + 1] == ' ')) {
+                telEmail = telEmail.replace(telEmail[i], ' ');
+            }else{
+                correct += telEmail[i];
+            }
+        }
+        setTelEmail(correct);
     }
 
     function connect(client: any) {
-        if(client != null) {
-            localStorage.setItem("isConnected", "true");
-            setCurrent("/reservation");
-            setPath("/reservation");
-        }else {
-            setPath("?");
+        let user = {
+            "type": "client",
+            "numeroClient": client.numeroClient,
+            "isConnected": true
         }
+
+        setMdp("");
+        setTelEmail("");
+        setDisplayUserStatus("block");
+        setCurrent("Réservation");
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.replace("http://localhost:5173/reservation");
     }
 
     return (
         <div className="auth">
             <div className="form connexion">
-                <p><button onClick={ () => setShowConnexion(false) }><i className="fa-solid fa-arrow-left"></i><small><i> S'inscrire</i></small></button></p>
+                <p><button className="arrow" onClick={ () => setShowConnexion(false) }><i className="fa-solid fa-arrow-left"></i><small><i> S'inscrire</i></small></button></p>
                 <h3 style={ { textAlign: "center" } }>Connexion</h3>
                 <div className="form-group">
                     <label>Téléphone ou Adresse email</label>
-                    <input type="text" onChange={ (e) => checkTelEmail(e.target.value) } className="form-control" placeholder="Numero téléphone ou email" />
+                    <input type="text" value={ telEmail } onChange={ (e) => checkTelEmail(e.target.value) } className="form-control" placeholder="Numero téléphone ou email" />
                     <p style={ { padding: "8px", color: "red", display: isCorrect.telEmail } }><small>Introuvale</small></p>
                 </div>
                 <div className="form-group">
                     <label>Mots de passe</label>
-                    <input type="password" onChange={ (e) => setMdp(e.target.value) } className="form-control" placeholder="Mots de passe" />
+                    <input type="password" value={ mdp } onChange={ (e) => setMdp(e.target.value) } className="form-control" placeholder="Mots de passe" />
                     <p style={ { color: "red", display: isCorrect.mdp } }><small>Mots de passe incorrectes</small></p>
                 </div>
                 <p style={ { padding: "8px", color: "red", display: nope } }><small>Compte introuvable !</small></p><br />
-                <p style={ { padding: "8px", color: "green", display: nope } }><small>Veuillez s'inscrire si vous n'avez pas de compte</small></p>
+                <p style={ { padding: "8px", color: "red", display: nope } }><small>Vérifiez bien vos informations</small></p>
                 <div className="form-group">
-                    <Link to={path}>
                     <input type="button" onClick={ seConnecter } disabled={
                         ((mdp == '') || (telEmail == ''))
                             ? true
                             : false
-                        } className="form-control btn btn-primary" value={ "Se connecter" } style={ { marginTop: "8px" } } />  
-                    </Link>
+                        } className="form-control btn btn-primary" style={ { marginTop: "8px" } } value={ "Se connecter" } />
                 </div>
             </div>
         </div>

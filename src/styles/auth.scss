@@ -28,13 +28,13 @@ $color2: #1783db;
         color: $color1;
         box-shadow: 2px 2px 50px 20px rgba($color: $color1, $alpha: 0.2);
 
-        button {
+        .arrow {
             background-color: $color0;
             border: none;
             transition: $tr;
         }
 
-        button:hover {
+        .arrow:hover {
             transform: scale(0.98);
             background-color: $color2;
             color: $color0;

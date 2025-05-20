@@ -42,6 +42,22 @@ $tr: 0.3s;
             font-size: $px * 3;
         }
     }
+    .right-side {
+        @include ths.flex();
+
+        .status {
+            margin: $px;
+
+            .btn-user {
+                padding: $px $px*2;
+                font-size: 20px;
+                color: $color1;
+                background-color: $color0;
+                border: 1px solid rgba($color: $color1, $alpha: 0.2);
+                border-radius: $px*4;
+            }
+        }
+    }
     .menu {
         transition: all $tr;
 
@@ -217,21 +233,6 @@ $tr: 0.3s;
 .btn {
     border-radius: calc($px / 2);
 }
-.fa-user {
-    font-size: $px*5;
-    position: fixed;
-    z-index: 111;
-    right: $px*5;
-    bottom: $px*7;
-    color: $color2;
-    border: 2px solid $color2;
-    border-radius: 80%;
-    padding: $px;
-    transition: all $tr;
-}
-.fa-user:hover {
-    transform: scale(0.98);
-}
 
 @media screen and (max-width: 995px) {
     .header {
@@ -243,6 +244,20 @@ $tr: 0.3s;
 
             span {
                 font-size: $px * 3;
+            }
+        }
+        .right-side {
+            .status {
+                margin: $px;
+
+                .btn-user {
+                    padding: $px/2 calc($px * 3/2);
+                    font-size: 20px;
+                    color: $color1;
+                    background-color: $color0;
+                    border: 1px solid rgba($color: $color1, $alpha: 0.2);
+                    border-radius: $px*4;
+                }
             }
         }
         .menu {
@@ -360,5 +375,19 @@ $tr: 0.3s;
                 }
             }
         }
+    }
+}
+
+.deconnecter {
+    @include ths.flex();
+    width: 100%;
+    background-color: $color0;
+    height: 111vh;
+
+    .pop {
+        color: black;
+        border: 1px solid black;
+        box-shadow: 15px 15px 8px 159px rgba($color: $color1, $alpha: 0.5);
+        padding: $px * 2;
     }
 }

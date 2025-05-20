@@ -3,6 +3,14 @@
 $px: 8px;
 $tr: all 0.3s;
 
+@font-face {
+    font-family: Roboto;
+    src: url('../assets/fonts/Roboto_Condensed-Medium.ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: fallback;
+}
+
 .reservation {
     @include ths.flex(column, center, center);
     gap: 1rem;
@@ -29,14 +37,14 @@ $tr: all 0.3s;
 
     .formulaire {
         @include ths.flex();
-
+        font-family: Roboto;
         .row {
             @include ths.flex();
             flex-wrap: wrap;
 
             .col {
                 .form-control {
-                    border-radius: calc($px / 2);
+                    border-radius: 0px;
                 }
             }
         }
