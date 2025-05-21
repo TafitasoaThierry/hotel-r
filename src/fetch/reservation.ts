@@ -7,12 +7,12 @@ const update: string = "/updateReservation";
 const remove: string = "/deleteReservation";
 
 class Reservation {
-    private ref: number = 0; // auto increment, ID
-    private type: string = "";
-    private dateReservation: Date = new Date();
-    private dateDebut: Date = new Date();
-    private dateFin: Date = new Date();
-    private status: string = "";
+    // private ref: number = 0; // auto increment, ID
+    // private type: string = "";
+    // private dateReservation: Date = new Date();
+    // private dateDebut: Date = new Date();
+    // private dateFin: Date = new Date();
+    // private status: string = "";
 
     public obtenirListeReservation() {
         const fetch = axios.get(host + get);

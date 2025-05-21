@@ -1,7 +1,7 @@
 import img from "../assets/image/receptionniste.jpg";
-import reception from "../assets/image/reception.jpg";
-import connection from "../assets/image/undraw_internet-on-the-go_npa2.png";
-import service from "../assets/image/20945944.jpg";
+//import reception from "../assets/image/reception.jpg";
+//import connection from "../assets/image/undraw_internet-on-the-go_npa2.png";
+//import service from "../assets/image/20945944.jpg";
 import question from "../assets/image/question.png";
 import { Link } from "react-router";
 

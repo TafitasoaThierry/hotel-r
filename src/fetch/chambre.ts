@@ -3,14 +3,14 @@ import host from './host.ts';
 
 const post: string = "/addReservation";
 const get: string = "/getReservationList";
-const getChambreById: string = "/getChanbreById";
+//const getChambreById: string = "/getChanbreById";
 const update: string = "/updateReservation";
 const remove: string = "/deleteReservation";
 
 class Reservation {
-    private numero: string = ""; // ID
-    private type: string = "";
-    private status: string = "";
+    // private numero: string = ""; // ID
+    // private type: string = "";
+    // private status: string = "";
 
     public obtenirListeReservation() {
         const fetch = axios.get(host + get);

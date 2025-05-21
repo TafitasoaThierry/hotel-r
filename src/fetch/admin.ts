@@ -4,17 +4,17 @@ import Person from './person.ts';
 
 const post: string = "/addAdmin";
 const get: string = "/getAdminList";
-const getById: string = "/getAdminById";
+//const getById: string = "/getAdminById";
 const update: string = "/updateAdmin";
 const remove: string = "/deleteAdmin";
 
 class Admin extends Person {
-    private matricule: string; // ID
+    // private matricule: string; // ID
 
-    public constructor() {
-        super();
-        this.matricule = "";
-    }
+    // public constructor() {
+    //     super();
+    //     this.matricule = "";
+    // }
 
     public obtenirListeAdmin() {
         const fetch = axios.get(host + get);
