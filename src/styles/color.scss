@@ -1,0 +1,16 @@
+/*.
+logo {
+    color: blue;
+    animation: col 0.3s;
+    animation-timeline: view();
+    animation-range: entry 100%;
+}
+
+@keyframes col {
+    from {
+        color: blue;
+    }to {
+        color: green;
+    }
+}
+*/

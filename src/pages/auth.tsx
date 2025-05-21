@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/auth.scss";
 import Client from "../fetch/client";
+import serviceRoom from "../assets/image/room-service.png";
 
 export default function Auth({ setCurrent, setDisplayUserStatus}: any) {
     const [showConnexion, setShowConnexion] = useState(true);
@@ -38,11 +39,14 @@ function Creation({ setShowConnexion }: any) {
     }, [client.mdp])
 
     function inscrire() {
-        console.log("mdp = " + mdp);
-        console.log("client = " + JSON.stringify(client));
+        // console.log("mdp = " + mdp);
+        // console.log("client = " + JSON.stringify(client));
         const newclient = new Client();
         newclient.creerCompte(client)
-            .then((r) => {console.log(r)})
+            .then((response) => { 
+                // console.log(response);
+                console.log("create new client with status " + response.status) 
+            })
             .catch(() => console.log("inscription !okay"));
 
         setClient({ // clear form input
@@ -184,11 +188,14 @@ function Creation({ setShowConnexion }: any) {
         <div className="container">
             <div className="auth">
                 <div className="form creation">
-                    <p style={ { textAlign: "right" } }><button onClick={ () => setShowConnexion(true) }><small><i>Se connecter </i> </small> <i className="fa-solid fa-arrow-right"> </i></button></p>
+                    <div className="form-header">
+                        <p style={ { textAlign: "right" } }><button onClick={ () => setShowConnexion(true) } className="arrow"><i className="fa-solid fa-arrow-left"></i><small><i> Se connecter</i></small></button></p>
+                        <img src={ serviceRoom } alt="service de chambre" className="service-img2" />
+                    </div>
                     <h3 style={ { textAlign: "center" } }>Inscription</h3>
                     <div className="form-group">
                         <label>Nom</label>
-                        {/* or using a spread operator to update each propertie of client object */}
+                        {/* or using a spread operator to update each propertie of client object, @ fo tsy miangatra */}
                         <input type="text" className="form-control" maxLength={80} value={ client.nom } onChange={ (e) => checkNom(e.target.value) } placeholder="Nom" />
                         <p style={ { color: "green", display: nomInfo } }><small>Ne doit pas contient des caractères spéciaux ou nombres</small></p>
                     </div>
@@ -207,7 +214,7 @@ function Creation({ setShowConnexion }: any) {
                         <p style={ { color: "green", display: emailInfo } }><small>example@gmail.com</small></p>
                     </div>
                     <div className="form-group">
-                        <input type="button" onClick={ () => setShowConfirmMdp("inline") } disabled={ disabledBtn() } className="form-control btn btn-primary" value={ "S'inscrire" } style={ { marginTop: "8px" } } />
+                        <button onClick={ () => setShowConfirmMdp("inline") } disabled={ disabledBtn() } className="form-control btn btn-primary" value={ "S'inscrire" } style={ { marginTop: "8px" } }><i className="fa-solid fa-user-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -217,7 +224,7 @@ function Creation({ setShowConnexion }: any) {
 }
 
 function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
-    const [mdp, setMdp] = useState("");
+    const [mdp, setMdp] = useState(""); // different de sendMdp
     const [showMdpInfo, setShowMdpInfo] = useState("none"); // show if mdp.length < 8
     const [confirmation, setConfirmation] = useState(""); // mdp confirmation
     const [showConfirmationInfo, setShowConfirmationInfo] = useState("none"); // show if mdp != confirmation
@@ -241,9 +248,14 @@ function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
     function checkConfirmation(confirmation: string) {
         setConfirmation(confirmation);
 
-        ((mdp == confirmation) && (mdp.length >= 8))
-            ? setShowConfirmationInfo("none") // correct 
-            : setShowConfirmationInfo("inline"); // display error message if mdp.length < 8 and mdp != confirmation
+        if((mdp == confirmation) && (mdp.length >= 8)){
+            setShowConfirmationInfo("none") // correct 
+        }else if((mdp == confirmation) && (mdp.length < 8)) {
+            setShowMdpInfo("inline");
+            setShowConfirmationInfo("none");
+        }else {
+            setShowConfirmationInfo("inline"); // display error message if mdp.length < 8 and mdp != confirmation
+        }
     }
 
     function isCorrect() {
@@ -255,8 +267,7 @@ function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
 
     function validateForm() {
         // alert(`mdp = ${mdp} and confirm = ${confirmation}`);
-
-        sendMdp(mdp); // joker ty
+        sendMdp(mdp); // joker ty => setMpd
 
         // clear form
         setMdp("");
@@ -283,6 +294,7 @@ function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
         return (
             <div className="auth">
                 <div className="form mdp">
+                    <p style={ { textAlign: "center" } }><img src={ serviceRoom } alt="service de chambre" className="service-img2" /></p>
                     <h3 style={ { textAlign: "center" } }>Finaliser l'inscription</h3>
                     <div className="form-group">
                         <label>Mots de passe</label>
@@ -299,9 +311,6 @@ function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
                     </div>
                     <div className="form-group">
                         <input type="button" onClick={ () => quitConfirmForm() } className="form-control btn cancel" value={ "Annuler" } style={ { marginTop: "8px" } } />
-                    </div>
-                    <div className="form-group">
-                        {/* <p style={ { color: "green" } }><small>En validant vous pourrez effectuez des réservations</small></p> */}
                     </div>
                 </div>
             </div>
@@ -363,11 +372,25 @@ function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) 
     function checkTelEmail(telEmail: string) {
         let correct:string = "";
         let n = telEmail.length;
-
-        for(let i:number = 0; i < n; i++) {
-            if((telEmail[i] == telEmail[i + 1]) && (telEmail[i + 1] == ' ')) {
-                telEmail = telEmail.replace(telEmail[i], ' ');
-            }else{
+        
+        for(let i:number = 0; i < n; i++) { // voir code ascii
+            if(
+                (telEmail.charCodeAt(i) <= 42) ||
+                (44 <= telEmail.charCodeAt(i) && telEmail.charCodeAt(i) <= 47) ||
+                (58 <= telEmail.charCodeAt(i) && telEmail.charCodeAt(i) <= 63) ||
+                (91 <= telEmail.charCodeAt(i) && telEmail.charCodeAt(i) <= 96) ||
+                (123 <= telEmail.charCodeAt(i) && telEmail.charCodeAt(i) <= 155) || 
+                (telEmail.charCodeAt(i) == 157) ||
+                (168 <= telEmail.charCodeAt(i) && telEmail.charCodeAt(i) <= 191)
+            ) {
+                if((telEmail[i] == telEmail[i + 1]) && (telEmail[i + 1] == ' ')) {
+                    telEmail = telEmail.replace(telEmail[i], ' ');
+                }else if((telEmail[i] != telEmail[i+1] && telEmail[i] == ' ') || (telEmail[i] == '.')) {
+                    correct += telEmail[i];
+                }else{
+                    telEmail = telEmail.replace(telEmail[i], '');
+                }
+            }else {
                 correct += telEmail[i];
             }
         }
@@ -386,13 +409,20 @@ function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) 
         setDisplayUserStatus("block");
         setCurrent("Réservation");
         localStorage.setItem("user", JSON.stringify(user));
-        window.location.replace("http://localhost:5173/reservation");
+
+        // redirigena vers link reservation mampiasa window.location
+        // /auth = 5 donc current url moins 5 plus "/reservation"
+        // alert(window.location.toString().slice(0, (window.location.toString().length - 4)) + "reservation");
+        window.location.replace(window.location.toString().slice(0, (window.location.toString().length - 4)) + "reservation");
     }
 
     return (
         <div className="auth">
             <div className="form connexion">
-                <p><button className="arrow" onClick={ () => setShowConnexion(false) }><i className="fa-solid fa-arrow-left"></i><small><i> S'inscrire</i></small></button></p>
+                <div className="form-header">
+                    <img src={serviceRoom} alt="service de chambre" className="service-img" />
+                    <p><button className="arrow" onClick={ () => setShowConnexion(false) }><small><i>S'inscrire </i></small><i className="fa-solid fa-arrow-right"></i></button></p>
+                </div>
                 <h3 style={ { textAlign: "center" } }>Connexion</h3>
                 <div className="form-group">
                     <label>Téléphone ou Adresse email</label>
@@ -404,15 +434,15 @@ function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) 
                     <input type="password" value={ mdp } onChange={ (e) => setMdp(e.target.value) } className="form-control" placeholder="Mots de passe" />
                     <p style={ { color: "red", display: isCorrect.mdp } }><small>Mots de passe incorrectes</small></p>
                 </div>
-                <p style={ { padding: "8px", color: "red", display: nope } }><small>Compte introuvable !</small></p><br />
-                <p style={ { padding: "8px", color: "red", display: nope } }><small>Vérifiez bien vos informations</small></p>
                 <div className="form-group">
-                    <input type="button" onClick={ seConnecter } disabled={
+                    <button onClick={ seConnecter } disabled={
                         ((mdp == '') || (telEmail == ''))
                             ? true
                             : false
-                        } className="form-control btn btn-primary" style={ { marginTop: "8px" } } value={ "Se connecter" } />
+                        } className="form-control btn btn-primary" style={ { marginTop: "8px" } }><i className="fa-solid fa-sign-in"></i></button>
                 </div>
+                <p style={ { padding: "8px", color: "red", display: nope } }><small>Compte introuvable !</small></p><br />
+                <p style={ { padding: "8px", color: "green", display: nope } }><small>Vérifiez bien vos informations</small></p>
             </div>
         </div>
     );

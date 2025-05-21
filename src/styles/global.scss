@@ -14,6 +14,22 @@ $tr: 0.3s;
     font-display: fallback;
 }
 
+@font-face {
+    font-family: Kugile;
+    src: url('../assets/fonts/Kugile_Demo.ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: Apple;
+    src: url('../assets/fonts/AppleGaramond.ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: fallback;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -30,16 +46,18 @@ $tr: 0.3s;
     position: fixed;
     top: 0%;
     width: 100%;
-    z-index: 111;
+    z-index: 500;
     font-family: Roboto;
+    backdrop-filter: blur(8px);
 
     .logo {
         color: $color2;
         font-size: $px * 4;
 
         span {
-            font-weight: 600;
+            font-weight: bold;
             font-size: $px * 3;
+            font-family: Kugile, serif;
         }
     }
     .right-side {
@@ -49,12 +67,16 @@ $tr: 0.3s;
             margin: $px;
 
             .btn-user {
-                padding: $px $px*2;
                 font-size: 20px;
-                color: $color1;
-                background-color: $color0;
-                border: 1px solid rgba($color: $color1, $alpha: 0.2);
-                border-radius: $px*4;
+                background-color: $color1;
+                color: $color0;
+                border: none;
+                border-radius: 100%;
+                padding: $px $px*2;
+                transition: all 0.3s;
+            }
+            .btn-user:hover {
+                transform: scale(0.98);
             }
         }
     }
@@ -63,11 +85,11 @@ $tr: 0.3s;
 
         .menu-btn {
             @include ths.flex();
-            border-radius: $px * 4;
             background-color: $color0;
             color: $color1;
             transition: all $tr;
             border: 1px solid rgba($color: $color1, $alpha: 0.2);
+            border-radius: $px*4;
             padding: calc($px * 2 / 3);
             z-index: 112;
 
@@ -88,33 +110,47 @@ $tr: 0.3s;
                 }
             }
         }
+        @keyframes menu {
+            from {
+                right: -$px * 10;
+                opacity: 0;
+            }to {
+                right: $px;
+                opacity: 1;
+            }
+        }
         .nav-menu {
             display: none;
             position: absolute;
             top: $px * 7;
             right: $px;
-            margin: $px $px*3;
+            margin: $px $px * 3;
             padding: $px;
             width: 250px;
-            box-shadow: 1px 1px 8px 1px rgba($color: $color1, $alpha: 0.2);
+            box-shadow: -10px 10px 200px 10px rgba($color: $color2, $alpha: 0.5);
             border: 1px solid rgba($color: $color1, $alpha: 0.2);
-            border-radius: $px * 4;
+            border-radius: $px/2;
             background-color: $color0;
             text-align: left;
+            animation: menu 0.3s;
 
+            li {
+                text-align: left;
+            }
             li, .link {
-                color: $color2;
+                color: $color1;
                 list-style: none;
                 text-decoration: none;
                 display: block;
-                padding: $px;
                 width: 100%;
-                border-radius: $px * 4;
                 transition: all $tr;
+
+                .link { // only link
+                    padding: $px * 2;
+                }
             }
             i { // icon of each menu: accueil, reservation, ...
-                padding-right: $px;
-                padding-left: 0px;
+                padding: 0px $px 0px 0px;
             }
             li:hover, .link:hover {
                 background-color: #eeeeee;
@@ -124,9 +160,14 @@ $tr: 0.3s;
                 background-color: $color2;
                 color: $color0;
                 transition: all $tr;
+                padding: $px;
+                margin-top: $px;
+                padding: 0px;
+                border-radius: 0px;
 
                 .link {
                     color: $color0;
+                    padding: $px;
                 }
                 .link:hover {
                     color: $color0;
@@ -172,8 +213,23 @@ $tr: 0.3s;
             margin: $px;
         }
         .greeting { // Bienvenue: left side of landing page
+            font-family: Kugile;
             text-align: right;
-            font-size: $px * 5;
+            font-size: $px * 8;
+            text-shadow: 4px;
+            animation: text 0.3s;
+            animation-timeline: view();
+        }
+        @keyframes text {
+            from{
+                margin-left: 500px;
+                opacity: 0;
+            }
+            to {
+                margin-left: 50px;
+                opacity: 1;
+            }
+            
         }
         .link { // Container of description and link to reservation: right side of landing page
             border-left: 1px solid $color0;
@@ -183,6 +239,7 @@ $tr: 0.3s;
             .btn-primary { //  link to reservation
                 background-color: $color2;
                 border: 1px solid $color2;
+                border-radius: 0px;
             }
         }
         .description  { // in class link
@@ -194,44 +251,61 @@ $tr: 0.3s;
         }
     }
     .item {
-        @include ths.flex(row, center, space-between);
         height: 100vh;
-        animation: content $tr;
+    }
+    .service-presentation {
+        @include ths.flex(column, center, center);
+        animation: servicePresentation $tr;
         animation-timeline: view();
         transition: all $tr;
+        font-family: Kugile;
 
-        img {
-            width: 400px;
-            transition: all $tr;
-        }
-        img:hover {
-            transform: scale(0.98);
-        }
-        .reception {
-            text-align: center;
-        }
-        .reception-label {
-            width: 50%;
+        h1 {
+            font-size: $px * 10;
         }
     }
-    @keyframes content{
+
+    @media screen and (max-width: 550px) {
+        .service-presentation {
+            h1 {
+                font-size: $px * 3;
+            }
+        }
+    }
+
+    @keyframes servicePresentation{
         from {
-            padding: 0px;
-            opacity: 0;
-            margin: 0px;
             transform: scale(0);
         }
         to {
-            padding: $px * 20;
-            opacity: 1;
-            margin: 0 auto;
             transform: scale(1);
         }
     }
-}
 
-.btn {
-    border-radius: calc($px / 2);
+    .service-list {
+        @include ths.flex();
+        flex-wrap: wrap;
+        gap: 1rem;
+        animation: serviceList $tr;
+        animation-timeline: view();
+        transition: all $tr;
+
+        .box {
+            width: 200px;
+            height: 150px;
+            padding: $px;
+            border: 1px solid black;
+        }
+    }
+
+    @keyframes serviceList{
+        from {
+        @include ths.flex(row, center, center);
+        }
+        to {
+        @include ths.flex(row, left, center);
+        }
+    }
 }
 
 @media screen and (max-width: 995px) {
@@ -240,7 +314,7 @@ $tr: 0.3s;
         padding: ($px) ($px * 2);
 
         .logo {
-            font-size: $px * 3;
+            // font-size: $px * 3;
 
             span {
                 font-size: $px * 3;
@@ -252,11 +326,6 @@ $tr: 0.3s;
 
                 .btn-user {
                     padding: $px/2 calc($px * 3/2);
-                    font-size: 20px;
-                    color: $color1;
-                    background-color: $color0;
-                    border: 1px solid rgba($color: $color1, $alpha: 0.2);
-                    border-radius: $px*4;
                 }
             }
         }
@@ -280,13 +349,6 @@ $tr: 0.3s;
                 right: $px;
                 margin: $px;
                 padding: $px;
-
-                i {
-                    padding: $px;
-                }
-                .link {
-                    padding: 0px;
-                }
             }
         }
     }
@@ -350,14 +412,6 @@ $tr: 0.3s;
     }
     @media screen and (max-width: 295px) {
         .header {
-            // padding: calc($px / 2);
-            .logo {
-                font-size: $px * 3;
-
-                span {
-                    display: none;
-                }
-            }
             .menu {
                 .nav-menu {
                     top: $px * 5.2;
@@ -365,13 +419,6 @@ $tr: 0.3s;
                     margin: $px 0px;
                     padding: $px;
                     width: 100%;
-
-                    i {
-                        padding: $px;
-                    }
-                    .link {
-                        padding: 0px;
-                    }
                 }
             }
         }
@@ -381,13 +428,104 @@ $tr: 0.3s;
 .deconnecter {
     @include ths.flex();
     width: 100%;
-    background-color: $color0;
-    height: 111vh;
+    height: 100vh;
+    background-color: transparent;
+    font-family: Roboto;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    backdrop-filter: blur($px);
 
-    .pop {
+    .deconnecter-modal {
+        @include ths.flex(column, center, center);
+        background-color: $color0;
         color: black;
-        border: 1px solid black;
-        box-shadow: 15px 15px 8px 159px rgba($color: $color1, $alpha: 0.5);
+        border: 1px solid rgba($color: $color1, $alpha: 0.5);
+        border-radius: $px;
+        box-shadow: 15px 15px 1000px 100px rgba($color: $color1, $alpha: 0.5);
         padding: $px * 2;
+        animation: modal 0.6s;
+        z-index: 1002;
+        width: 275px;
+
+        .modal-icon {
+            font-size: 30px;
+            color: green;
+            padding: $px $px*2;
+            margin: $px;
+        }
+        .body {
+            text-align: center
+        }
+        .footer {
+            @include ths.flex(row, center, space-between);
+            margin-top: $px;
+            width: 100%;
+
+            .btn {
+                width: 50%;
+                border-radius: 0px;
+            }
+            .annuler {
+                border: 1px solid green;
+                color: green;
+            }
+            .confirmer {
+                background-color: green;
+                color: $color0;
+                margin-left: $px;
+            }
+        }
+    }
+    @media screen and (max-width: 290px) {
+        .deconnecter-modal {
+            padding: $px;
+            width: 100%;
+            .body {
+                font-size: 14px;
+            }
+        }
+    }
+    @keyframes modal {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 }
+
+@media screen and (max-width: 395px) { // hotel icon text
+    .logo {
+        span {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) { // bienvenue
+    @keyframes text {
+        from{
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+        
+    }
+}
+
+// .footer {
+//     //height: 100vh;
+//     width: 100%;
+
+//     .white-space {
+//         height: 55vh;
+//         background-color: #eeeeee;
+//     }
+//     .main {
+//         height: 45vh;
+//         background-color: #1783db;
+//     }
+// }

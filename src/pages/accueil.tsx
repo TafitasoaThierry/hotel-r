@@ -1,6 +1,8 @@
 import img from "../assets/image/receptionniste.jpg";
 import reception from "../assets/image/reception.jpg";
 import connection from "../assets/image/undraw_internet-on-the-go_npa2.png";
+import service from "../assets/image/20945944.jpg";
+import question from "../assets/image/question.png";
 import { Link } from "react-router";
 
 export default function Accueil({ setCurrent }: any) {
@@ -11,30 +13,40 @@ export default function Accueil({ setCurrent }: any) {
             </div>
             <div className="container">
                 <div className="landing">
-                    <div className="greeting">Bienvenue</div>
+                    <div className="greeting">BIENVENUE</div>
                     <div className="link">
-                        <p className="description">
-                            <b>Réserver maintenant et réposer plustard</b> <br />
-                            Assurez et vivez vôtre vacance en toute sécurité et confiance
-                        </p>
+                        <div className="description">
+                            <h3>Réserver maintenant et réposer plustard</h3>
+                            <p>Assurez et vivez vôtre vacance en toute sécurité et confiance</p>
+                        </div>
                         <Link to={ "/reservation" }><button className="btn btn-primary" onClick={ () => setCurrent("/reservation") }>Nos offres</button></Link>
                     </div>
                 </div>
-                <div className="item" style={{justifyContent: "center"}}><h1>Nos services</h1></div>
-                <div className="item">
-                    <div className="reception"><img src={ reception } alt="reception" /></div>
-                    <p className="reception-label">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, provident exercitationem dolorum hic voluptatem nostrum numquam nesciunt vel excepturi velit sunt, architecto ullam sed totam id voluptates corrupti beatae maiores?</p>
+                <div className="item service-presentation">
+                    <h1>Nos services <i className="fa-solid fa-hotel"></i></h1>
+                    <img src={ question } alt="?" width={600 + "px"} />
                 </div>
-                <div className="item">
-                    <div className="reception"><img src={ connection } alt="reception" /></div>
-                    <p className="reception-label">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, provident exercitationem dolorum hic voluptatem nostrum numquam nesciunt vel excepturi velit sunt, architecto ullam sed totam id voluptates corrupti beatae maiores?</p>
-                </div>
-                <div className="item">
-                    <div className="reception"><img src={ reception } alt="reception" /></div>
-                    <p className="reception-label">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, provident exercitationem dolorum hic voluptatem nostrum numquam nesciunt vel excepturi velit sunt, architecto ullam sed totam id voluptates corrupti beatae maiores?</p>
-                </div>
-                <div className="item">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, provident exercitationem dolorum hic voluptatem nostrum numquam nesciunt vel excepturi velit sunt, architecto ullam sed totam id voluptates corrupti beatae maiores?
+                <div className="item service-list">
+                    <div className="box">
+                        <h5>
+                            <i className="fa-solid fa-x"></i> Réception 24h/24
+                        </h5>
+                    </div>
+                    <div className="box">
+                        <h5>
+                            <i className="fa-solid fa-x"></i> Service de chambre
+                        </h5>
+                    </div>
+                    <div className="box">
+                        <h5>
+                            <i className="fa-solid fa-wifi"></i> Connexion internet
+                        </h5>
+                    </div>
+                    <div className="box">
+                        <h5>
+                            <i className="fa-solid fa-x"></i> Petit déjeuner
+                        </h5>
+                    </div>
                 </div>
             </div>
         </div>

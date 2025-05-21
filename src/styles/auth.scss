@@ -15,6 +15,18 @@ $color2: #1783db;
     font-display: fallback;
 }
 
+.form-header {
+    @include ths.flex(row, center, space-between);
+
+    .service-img {
+        width: 50px;
+        transform: rotate(-45deg);
+    }
+}
+.service-img2 { // image for Inscrire and confirmMdp component
+    width: 50px;
+}
+
 .auth {
     @include ths.flex();
     gap: 1rem;
@@ -24,7 +36,7 @@ $color2: #1783db;
         padding: $px * 2;
         border: 1px solid rgba($color: $color1, $alpha: 0.2);
         background-color: $color0;
-        border-radius: $px * 2;
+        border-radius: 0px;
         color: $color1;
         box-shadow: 2px 2px 50px 20px rgba($color: $color1, $alpha: 0.2);
 
@@ -63,40 +75,41 @@ $color2: #1783db;
     }
 
     .connexion {
-        margin-top: 550px;
-        animation: connex 0.5s;
+        margin-top: 634px;
+        animation: connex 1s;
         position: absolute;
     }
 
     .creation {
-        margin-top: 700px;
-        animation: creation 0.5s;
+        margin-top: 800px;
+        animation: creation 1s;
         position: absolute;
     }
     
     @keyframes connex {
         from {
             opacity: 0;
-            margin-right: 50px;
+            // margin-right: 50px;
         }
         to {
             opacity: 1;
-            margin-right: -4;
+            // margin-right: -4;
         }
     }
 
     @keyframes creation {
         from {
             opacity: 0;
-            margin-left: 50px;
+            // margin-left: 50px;
         }
         to {
             opacity: 1;
-            margin-left: -4;
+            // margin-left: -4;
         }
     }
 
     .mdp {
+        margin-top: 35px;
         height: 500px;
         z-index: 20;
         padding-top: 50px;
