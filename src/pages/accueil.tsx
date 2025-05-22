@@ -1,9 +1,9 @@
 import img from "../assets/image/receptionniste.jpg";
-//import reception from "../assets/image/reception.jpg";
-//import connection from "../assets/image/undraw_internet-on-the-go_npa2.png";
-//import service from "../assets/image/20945944.jpg";
-import question from "../assets/image/question.png";
 import { Link } from "react-router";
+import question from "../assets/image/question.png";
+import time from "../assets/image/time.png";
+import roomService from "../assets/image/roomService.png";
+import petitDejeuner from "../assets/image/petitdejeuner.png";
 
 export default function Accueil({ setCurrent }: any) {
     return (
@@ -28,24 +28,32 @@ export default function Accueil({ setCurrent }: any) {
                 </div>
                 <div className="item service-list">
                     <div className="box">
-                        <h5>
-                            <i className="fa-solid fa-x"></i> Réception 24h/24
-                        </h5>
+                        <div className="service">
+                            <img src={time} alt="service" className="service-icon" />
+                        </div>
+                        <h5>Réception 24h/24</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur ad porro ex provident dignissimos accusantium maiores omnis expedita.</p>
                     </div>
                     <div className="box">
-                        <h5>
-                            <i className="fa-solid fa-x"></i> Service de chambre
-                        </h5>
+                        <div className="service">
+                            <img src={roomService} alt="service" className="service-icon" />
+                        </div>
+                        <h5>Service de chambre</h5>
+                        <p>Vous pouvez demander à toute heure que ce soit un petit-déjeuner tardif ou snack de minuit</p>
                     </div>
                     <div className="box">
-                        <h5>
-                            <i className="fa-solid fa-wifi"></i> Connexion internet
-                        </h5>
+                        <div className="service">
+                            <img src={time} alt="service" className="service-icon" />
+                        </div>
+                        <h5>Connexion internet</h5>
+                        <p>Un Wi-Fi gratuit et sécurisé dans toutes les chambres et espaces communs</p>
                     </div>
                     <div className="box">
-                        <h5>
-                            <i className="fa-solid fa-x"></i> Petit déjeuner
-                        </h5>
+                        <div className="service">
+                            <img src={petitDejeuner} alt="service" className="service-icon" />
+                        </div>
+                        <h5>Petit déjeuner</h5>
+                        <p>Avec des options saines et locales</p>
                     </div>
                 </div>
             </div>
