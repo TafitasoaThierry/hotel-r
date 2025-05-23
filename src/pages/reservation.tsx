@@ -1,7 +1,7 @@
 import "../styles/reservation.scss";
-import queen from "../assets/image/queen.png";
-import king from "../assets/image/king.png";
-import twin from "../assets/image/twin.png";
+// import queen from "../assets/image/queen.png";
+// import king from "../assets/image/king.png";
+// import twin from "../assets/image/twin.png";
 
 export default function Reservation() {
     return (
