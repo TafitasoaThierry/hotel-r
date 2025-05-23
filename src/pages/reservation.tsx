@@ -7,6 +7,12 @@ export default function Reservation() {
     return (
         <div className="reservation">
             <h1>Offres</h1>
+        </div>
+    );
+}
+
+/**
+ * 
             <div className="offres">
                 <div className="box">
                     <h5>Queen</h5>
@@ -40,6 +46,4 @@ export default function Reservation() {
                     </div>
                 </div>
             </form>
-        </div>
-    );
-}
+ */

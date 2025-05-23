@@ -5,8 +5,8 @@ import Person from './person.ts';
 const post: string = "/addClient";
 const get: string = "/getClientList"; // liste globale
 // const getClientById = "/getClientById";
-const getClientByTel = "/getClientByTel"; // obtenir client par le numero tel
-const getClientByEmail = "/getClientByEmail"; // obtenir client par le numero tel
+const getClientByTel = "/getClientByTel"; // obtenir * client par le numero tel
+const getClientByEmail = "/getClientByEmail"; // obtenir * client par email
 const update: string = "/updateClient";
 const remove: string = "/deleteClient";
 

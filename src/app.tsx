@@ -3,6 +3,7 @@ import Reservation from "./pages/reservation";
 import Contact from "./pages/contact";
 import Auth from "./pages/auth";
 import "./styles/color.scss";
+import logo from "./assets/image/hotel.png";
 import { BrowserRouter, Routes, Route, Link } from "react-router";
 import { useEffect, useState } from "react";
 
@@ -11,7 +12,6 @@ export default function App() {
     const [displayUserStatus, setDisplayUserStatus] = useState("none");
     const [displayUserIcon, setDisplayUserIcon] = useState("none");
     const [showDeconnecterModal, setShowDeconnecterModal] = useState("none");
-    
     /**
      * onpopstate: to detect go forward() and back() history event
      */
@@ -65,6 +65,36 @@ export default function App() {
     return (
         <BrowserRouter>
             <div className="header">
+                <div className="logo-field">
+                    <img src={logo} alt="logo" className="logo" />
+                    <span>HOTEL</span>
+                </div>
+                <div className="menu">
+                    <li><Link to={ "/" } className="link" onClick={ () => setCurrent("Accueil") } ><i className="fa-solid fa-home"></i> <span>Accueil</span></Link></li>
+                    <li><Link to={ "/reservation" } className="link" onClick={ () => setCurrent("Réservation") }><i className="fa-solid fa-calendar"></i> <span>Réservation</span></Link></li>
+                    <li><Link to={ "/contact" } className="link" onClick={ () => setCurrent("Contact") }><i className="fa-solid fa-phone"></i> <span>Contact</span></Link></li>
+                </div>
+                <div className="user-btn-manager">
+                    <Link to={ "/auth" } className="link" onClick={ () => setCurrent("Connexion") } style={ { display: displayUserStatus == "block" ? "none" : "block" } }><button className="btn-connecter"><i className="fa-solid fa-sign-in"></i> <span>Se connecter</span></button></Link>
+                    <Link to={ "?" } className="link" onClick={ () => seDeconnecter() } style={ { display: displayUserStatus } }><button className="btn-deconnecter"><i className="fa-solid fa-sign-out"></i> <span>Se déconnecter</span></button></Link>
+                </div>
+                <div className="drop-down">
+                    <div className="current">
+                        <div className="current-page">{current}</div>
+                        <button className="bar"><i className="fa-solid fa-bars"></i></button>
+                    </div>
+                    <div className="drop-down-menu">
+                        <li><Link to={ "/" } className="link" onClick={ () => setCurrent("Accueil") }><i className="fa-solid fa-home"></i>Accueil</Link></li>
+                        <li><Link to={ "/reservation" } className="link" onClick={ () => setCurrent("Réservation") }><i className="fa-solid fa-calendar"></i>Réservation</Link></li>
+                        <li><Link to={ "/contact" } className="link" onClick={ () => setCurrent("Contact") }><i className="fa-solid fa-phone"></i>Contact</Link></li>
+                        <li className="sign-btn" style={ { display: displayUserStatus == "block" ? "none" : "block" } }><Link to={ "/auth" } className="user-btn" onClick={ () => setCurrent("Connexion") }><i className="fa-solid fa-sign-in"></i> Se connecter</Link></li>
+                        <li className="sign-btn" style={ { display: displayUserStatus } }><Link to={ "?" } className="user-btn" onClick={ () => seDeconnecter() }><i className="fa-solid fa-sign-out"></i> Se déconnecter</Link></li>
+                    </div>
+                </div>
+            </div>
+            
+
+            {/* <div className="header" style={{display: desktopHeader == "block" ? "none" : "block"}}>
                 <div className="logo"><i className="fa-solid fa-hotel"></i><span> HOTEL</span></div>
                 <div className="right-side">
                     <div className="status" style={ { display: displayUserIcon } }>
@@ -75,7 +105,7 @@ export default function App() {
                             <div className="current">{ current }</div>
                             <button><i className="fa-solid fa-navicon"></i></button>
                         </div>
-                        <div className="nav-menu">
+                        <div className="nav-menu" style={{display: desktopHeader == "block" ? "none" : "block"}}>
                             <li><Link to={ "/" } className="link" onClick={ () => setCurrent("Accueil") }><i className="fa-solid fa-home"></i>Accueil</Link></li>
                             <li><Link to={ "/reservation" } className="link" onClick={ () => setCurrent("Réservation") }><i className="fa-solid fa-calendar"></i>Réservation</Link></li>
                             <li><Link to={ "/contact" } className="link" onClick={ () => setCurrent("Contact") }><i className="fa-solid fa-phone"></i>Contact</Link></li>
@@ -84,7 +114,7 @@ export default function App() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="deconnecter-field" style={ { display: showDeconnecterModal } }>
                 <Deconnecter setShowDeconnecterModal={ setShowDeconnecterModal } setDisplayUserStatus={ setDisplayUserStatus } />

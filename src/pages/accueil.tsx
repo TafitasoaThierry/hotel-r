@@ -1,32 +1,38 @@
-import img from "../assets/image/receptionniste.jpg";
 import { Link } from "react-router";
+import imgPresentation from "../assets/image/20945944.jpg";
 import question from "../assets/image/question.png";
 import time from "../assets/image/time.png";
 import roomService from "../assets/image/roomService.png";
 import petitDejeuner from "../assets/image/petitdejeuner.png";
+import wifi from "../assets/image/wi-fi.png";
+import logo from "../assets/image/hotel_17020506.png";
+//import video from "../assets/video/hotel (1).mp4";
 
 export default function Accueil({ setCurrent }: any) {
     return (
         <div className="accueil">
-            <div className="welcome">
-                <img src={ img } alt="receptionniste" />
-            </div>
-            <div className="container">
-                <div className="landing">
-                    <div className="greeting">BIENVENUE</div>
-                    <div className="link">
-                        <div className="description">
-                            <h3>Réserver maintenant et réposer plustard</h3>
-                            <p>Assurez et vivez vôtre vacance en toute sécurité et confiance</p>
-                        </div>
-                        <Link to={ "/reservation" }><button className="btn btn-primary" onClick={ () => setCurrent("/reservation") }>Nos offres</button></Link>
+            <div className="presentation">
+                <div className="text">
+                    <div className="salutation"><h1>BIENVENUE</h1></div>
+                    <div className="introduction">
+                        <h3>Réserver maintenant et réposer plustard</h3>
+                        <p>Assurez et vivez vôtre vacance en toute sécurité et confiance</p>
+                        <Link to={ "/reservation" }><button className="btn" onClick={ () => setCurrent("/reservation") }>Nos offres</button></Link>
                     </div>
                 </div>
-                <div className="item service-presentation">
-                    <h1>Nos services <i className="fa-solid fa-hotel"></i></h1>
-                    <img src={ question } alt="?" width={600 + "px"} />
+                <div className="image">
+                    <img src={imgPresentation} alt="presentation" />
                 </div>
-                <div className="item service-list">
+            </div>
+            <div className="service-presentation">
+                <h1>NOS SERVICES</h1>
+                <img src={ question } alt="?" width={600 + "px"} />
+            </div>
+            <div className="service-list">
+                <div className="image">
+                    <img src={logo} alt="hotel" />
+                </div>
+                <div className="content">
                     <div className="box">
                         <div className="service">
                             <img src={time} alt="service" className="service-icon" />
@@ -43,7 +49,7 @@ export default function Accueil({ setCurrent }: any) {
                     </div>
                     <div className="box">
                         <div className="service">
-                            <img src={time} alt="service" className="service-icon" />
+                            <img src={wifi} alt="service" className="service-icon" />
                         </div>
                         <h5>Connexion internet</h5>
                         <p>Un Wi-Fi gratuit et sécurisé dans toutes les chambres et espaces communs</p>
