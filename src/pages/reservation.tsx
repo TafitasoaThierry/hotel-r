@@ -34,7 +34,7 @@ export default function Reservation() {
             <h5>Types de chambre</h5>
             <div className="offres">
                 <div className="box">
-                    <input type="radio" name="choix" className="radio" onChange={(e) => {
+                    <input type="radio" name="choix" className="radio" onChange={() => {
                         setReservation(previousState => {
                             return { ... previousState, type: "Standard" }
                         });
@@ -43,7 +43,7 @@ export default function Reservation() {
                     <img src={ queen } alt="deluxe" />
                 </div>
                 <div className="box">
-                    <input type="radio" name="choix" className="radio" onChange={(e) => {
+                    <input type="radio" name="choix" className="radio" onChange={() => {
                         setReservation(previousState => {
                             return { ... previousState, type: "King" }
                         });
@@ -52,7 +52,7 @@ export default function Reservation() {
                     <img src={ king } alt="deluxe" />
                 </div>
                 <div className="box">
-                    <input type="radio" name="choix" className="radio" onChange={(e) => {
+                    <input type="radio" name="choix" className="radio" onChange={() => {
                         setReservation(previousState => {
                             return { ... previousState, type: "2 Lits" }
                         });

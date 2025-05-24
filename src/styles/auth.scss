@@ -179,7 +179,7 @@ $col3: #555555;
     z-index: 2000;
     background-color: transparent;
     height: 100vh;
-    backdrop-filter: blur($px/2);
+    backdrop-filter: blur(calc($px / 2));
     animation: message 1s;
     color: $col3;
     position: absolute;
