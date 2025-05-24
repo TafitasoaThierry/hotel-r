@@ -75,10 +75,16 @@ export default function App() {
                     <li><Link to={ "/contact" } className="link" onClick={ () => setCurrent("Contact") }><i className="fa-solid fa-phone"></i> <span>Contact</span></Link></li>
                 </div>
                 <div className="user-btn-manager">
+                    <div className="status" style={ { display: displayUserIcon } }>
+                        <button className="btn btn-user">I</button>
+                    </div>
                     <Link to={ "/auth" } className="link" onClick={ () => setCurrent("Connexion") } style={ { display: displayUserStatus == "block" ? "none" : "block" } }><button className="btn-connecter"><i className="fa-solid fa-sign-in"></i> <span>Se connecter</span></button></Link>
                     <Link to={ "?" } className="link" onClick={ () => seDeconnecter() } style={ { display: displayUserStatus } }><button className="btn-deconnecter"><i className="fa-solid fa-sign-out"></i> <span>Se déconnecter</span></button></Link>
                 </div>
                 <div className="drop-down">
+                    <div className="status" style={ { display: displayUserIcon } }>
+                        <button className="btn btn-user">I</button>
+                    </div>
                     <div className="current">
                         <div className="current-page">{current}</div>
                         <button className="bar"><i className="fa-solid fa-bars"></i></button>

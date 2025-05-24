@@ -6,7 +6,6 @@ import roomService from "../assets/image/roomService.png";
 import petitDejeuner from "../assets/image/petitdejeuner.png";
 import wifi from "../assets/image/wi-fi.png";
 import logo from "../assets/image/hotel_17020506.png";
-//import video from "../assets/video/hotel (1).mp4";
 
 export default function Accueil({ setCurrent }: any) {
     return (

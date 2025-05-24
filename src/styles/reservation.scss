@@ -1,6 +1,9 @@
 @use "./ths.scss";
 
 $px: 8px;
+$col1: #ffffff;
+$col2: #295cb9;
+$col3: #555555;
 $tr: all 0.3s;
 
 @font-face {
@@ -11,42 +14,105 @@ $tr: all 0.3s;
     font-display: fallback;
 }
 
+font-face {
+    font-family: Kugile;
+    src: url('../assets/fonts/Kugile_Demo.ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: fallback;
+}
+
 .reservation {
     @include ths.flex(column, center, center);
     gap: 1rem;
-    height: 100vh;
+    margin-top: 80px;
+    font-family: Roboto;
 
     .offres {
-        @include ths.flex();
-        gap: 1rem;
-        flex-wrap: wrap;
-        
+        border: 1px solid #00000034;
+        transition: $tr;
+
         .box {
-            @include ths.flex(column, center, center);
-            width: 200px;
-            height: 200px;
-            padding: $px;
-            border: 1px solid rgba(0, 0, 0, 0.151);
-            border-radius: $px * 4;
+            @include ths.flex(row, center, space-between);
+            width: 400px;
+            border: 1px solid #00000056;
+            margin: $px;
+            padding: $px/2 $px*2;
             transition: $tr;
-        }
-        .box:hover {
-            transform: scale(0.98);
-        }
-    }
+            color: $col3;
+            font-weight: bold;
+            transition: $tr;
 
-    .formulaire {
-        @include ths.flex();
-        font-family: Roboto;
-        .row {
-            @include ths.flex();
-            flex-wrap: wrap;
-
-            .col {
-                .form-control {
-                    border-radius: 0px;
-                }
+            .radio {
+                padding: $px;
+                width: 20px;
+                height: 20px;
+            }
+            label {
+                font-family: Kugile;
+                padding: $px;
+            }
+            img {
+                width: 50px;
             }
         }
+        .box:hover {
+            background-color: #edf3ff;
+        }
+
+        .question {
+            border: none;
+            outline: none;
+            background-color: $col1;
+            font-family: Roboto;
+            text-decoration: underline;
+            color: $col2;
+            text-align: center;
+            width: 100%;
+            padding: $px;
+
+            .fa-question {
+                padding: $px;
+                border-radius: 100%;
+                background-color: $col2;
+                color: $col1;
+            }
+        }
+    }
+    .offres:hover {
+        box-shadow: 1px 1px 5px 0px rgba($color: $col2, $alpha: 0.4);
+    }
+    .container {
+        // height: 100vh;
+        // @include ths.flex(column, center, center);
+    }
+    .form {
+        @include ths.flex(row, center, center);
+        gap: 1rem;
+        font-family: Roboto;
+        padding: $px;
+        border: 1px solid #00000034;
+        transition: $tr;
+        h5 {
+            padding: $px;
+        }
+        .form-group {
+            margin: $px;
+            @include ths.flex(row, center, center);
+
+            label {
+                padding: $px;
+            }
+            .form-control {
+                border-radius: 0px;
+            }
+            .btn {
+                background-color: $col2;
+                color: $col1;
+            }
+        }
+    }
+    .form:hover, .form:focus {
+        box-shadow: 1px 1px 5px 0px rgba($color: $col2, $alpha: 0.4);
     }
 }

@@ -3,9 +3,9 @@
 $px: 8px;
 $tr: all 0.3s;
 
-$color0: #ffffff;
-$color1: #3f3f3f;
-$color2: #1783db;
+$col1: #ffffff;
+$col2: #295cb9;
+$col3: #555555;
 
 @font-face {
     font-family: Roboto;
@@ -34,103 +34,86 @@ $color2: #1783db;
 
     .form {
         padding: $px * 2;
-        border: 1px solid rgba($color: $color1, $alpha: 0.2);
-        background-color: $color0;
+        border: 1px solid rgba($color: $col2, $alpha: 0.2);
+        background-color: $col1;
         border-radius: 0px;
-        color: $color1;
-        box-shadow: 2px 2px 50px 20px rgba($color: $color1, $alpha: 0.2);
+        color: $col2;
+        box-shadow: 2px 2px 50px 20px rgba($color: $col2, $alpha: 0.2);
 
         .arrow {
-            background-color: $color0;
+            background-color: $col1;
             border: none;
             transition: $tr;
         }
-
         .arrow:hover {
             transform: scale(0.98);
-            background-color: $color2;
-            color: $color0;
+            background-color: $col2;
+            color: $col1;
             padding: 0px $px;
         }
-
         .form-group {
             width: 400px;
             padding: $px;
 
             label {
                 padding: $px $px $px 0px;
-                color: $color1;
+                color: $col3;
             }
-
             .form-control {
                 width: 100%;
                 border-radius: 0px;
             }
-
-            .btn-primary:focus {
-                background-color: $color2;
-                color: $color0;
+            .btn-inscrire, .btn-connex, .btn-valider {
+                background-color: $col2;
+                border: 1px;
+                color: $col1;
+            }
+            .btn-inscrire:focus, .btn-connex:focus {
+                background-color: $col2;
+                color: $col1;
             }
         }
     }
-
     .connexion {
-        margin-top: 634px;
+        margin-top: 80px;
         animation: connex 1s;
-        position: absolute;
+        position: relative;
     }
-
     .creation {
-        margin-top: 800px;
+        margin-top: 80px;
         animation: creation 1s;
-        position: absolute;
+        position: relative;
     }
-    
     @keyframes connex {
         from {
             opacity: 0;
-            // margin-right: 50px;
         }
         to {
             opacity: 1;
-            // margin-right: -4;
         }
     }
-
     @keyframes creation {
         from {
             opacity: 0;
-            // margin-left: 50px;
         }
         to {
             opacity: 1;
-            // margin-left: -4;
         }
     }
-
     .mdp {
-        margin-top: 35px;
         height: 500px;
         z-index: 20;
-        padding-top: 50px;
-        padding-bottom: 150px;
-        box-shadow: 50px 50px 80px 500px rgba($color: $color0, $alpha: 1);
+        box-shadow: 50px 50px 80px 500px rgba($color: $col1, $alpha: 1);
         animation: mdp 0.5s;
-        position: relative;
-        top: 70px;
-        border: 1px solid rgba($color: $color1, $alpha: 0.2);
+        position: absolute;
+        top: 80px;
+        border: 1px solid rgba($color: $col2, $alpha: 0.2);
 
         .cancel {
-            background-color: $color0;
-            color: $color2;
-            border: 1px solid $color2;
-        }
-        .cancel:hover {
-            background-color: $color0;
-            color: $color2;
+            border: 1px solid $col2;
+            color: $col2;
         }
     }
-
     @keyframes mdp {
         from {
             opacity: 0;
@@ -138,13 +121,17 @@ $color2: #1783db;
         }
         to {
             opacity: 1;
-            top: 70px;
+            top: 80px;
         }
     }
-
     @media screen and (max-width: 450px) {
+        .connexion {
+            margin-left: 12px;
+            margin-right: 12px;
+        }
         .form {
             width: 100%;
+            padding: $px;
             
             .form-group {
                 width: 100%;
@@ -152,9 +139,7 @@ $color2: #1783db;
 
                 label {
                     padding: $px $px $px 0px;
-                    color: $color1;
                 }
-
                 .form-control {
                     width: 100%;
                     font-size: 14px;
@@ -169,7 +154,6 @@ $color2: #1783db;
                 opacity: 1;
             }
         }
-
         @keyframes mdp {
             from {
                 opacity: 0;
@@ -178,7 +162,6 @@ $color2: #1783db;
                 opacity: 1;
             }
         }
-
         @keyframes creation {
             from {
                 opacity: 0;
@@ -186,6 +169,55 @@ $color2: #1783db;
             to {
                 opacity: 1;
             }
+        }
+    }
+}
+
+.success {
+    @include ths.flex();
+    font-family: Roboto;
+    z-index: 2000;
+    background-color: transparent;
+    height: 100vh;
+    backdrop-filter: blur($px/2);
+    animation: message 1s;
+    color: $col3;
+    position: absolute;
+    width: 100%;
+
+    .message {
+        background-color: $col1;
+        padding: $px;
+        border: 1px solid rgba($color: $col2, $alpha: 0.2);
+        border-radius: $px;
+        box-shadow: 1px 1px 50px 5px rgba($color: $col3, $alpha: 0.3);
+        text-align: center;
+        i {
+            border: 2px solid rgba($color: $col2, $alpha: 0.6);
+            padding: $px;
+            border-radius: 100%;
+            color: $col2;
+        }
+        h3 {
+            color: $col2;
+        }
+        .btn {
+            width: 100%;
+            background-color: $col2;
+            color: $col1;
+            border-radius: 0px;
+        }
+        .btn:hover {
+            background-color: $col2;
+            color: $col1;
+        }
+    }
+    @keyframes message {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
         }
     }
 }

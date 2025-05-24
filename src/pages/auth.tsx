@@ -5,14 +5,17 @@ import serviceRoom from "../assets/image/room-service.png";
 
 export default function Auth({ setCurrent, setDisplayUserStatus}: any) {
     const [showConnexion, setShowConnexion] = useState(true);
+    const [displaySuccessMessage, setDisplaySuccessMessage] = useState("none");
 
-    if(showConnexion) {
+    if(showConnexion && displaySuccessMessage == "none") {
         return <Connexion setShowConnexion={ setShowConnexion } setCurrent={ setCurrent } setDisplayUserStatus={ setDisplayUserStatus } />;
+    }else if(showConnexion == false && displaySuccessMessage == "none"){
+        return <Creation setShowConnexion={ setShowConnexion } setDisplaySuccessMessage={ setDisplaySuccessMessage } />;
     }
-    return <Creation setShowConnexion={ setShowConnexion } />;
+    return <SuccessMessage displaySuccessMessage={ displaySuccessMessage } setDisplaySucessMessage={ setDisplaySuccessMessage } />
 }
 
-function Creation({ setShowConnexion }: any) {
+function Creation({ setShowConnexion, setDisplaySuccessMessage }: any) {
     const [client, setClient] = useState({ // client object
         nom: "",
         prenoms: "",
@@ -45,19 +48,20 @@ function Creation({ setShowConnexion }: any) {
         newclient.creerCompte(client)
             .then((response) => { 
                 // console.log(response);
-                console.log("create new client with status " + response.status) 
+                console.log("create new client with status " + response.status);
+                setDisplaySuccessMessage("flex");
+                setClient({ // clear form input
+                    nom: "",
+                    prenoms: "",
+                    email: "",
+                    tel: "",
+                    mdp: ""
+                })
+                setIsEmail(false);
+                setMdp(""); // mdp = ""; valeur vide
+                setShowConnexion("true");
             })
             .catch(() => console.log("inscription !okay"));
-
-        setClient({ // clear form input
-            nom: "",
-            prenoms: "",
-            email: "",
-            tel: "",
-            mdp: ""
-        })
-
-        setMdp(""); // mdp = ""; valeur vide
     }
 
     /**
@@ -214,7 +218,7 @@ function Creation({ setShowConnexion }: any) {
                         <p style={ { color: "green", display: emailInfo } }><small>example@gmail.com</small></p>
                     </div>
                     <div className="form-group">
-                        <button onClick={ () => setShowConfirmMdp("inline") } disabled={ disabledBtn() } className="form-control btn btn-primary" value={ "S'inscrire" } style={ { marginTop: "8px" } }><i className="fa-solid fa-user-plus"></i></button>
+                        <button onClick={ () => setShowConfirmMdp("inline") } disabled={ disabledBtn() } className="form-control btn btn-inscrire" value={ "S'inscrire" } style={ { marginTop: "8px" } }><i className="fa-solid fa-user-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -223,11 +227,24 @@ function Creation({ setShowConnexion }: any) {
     );
 }
 
+function SuccessMessage({displaySuccessMessage, setDisplaySucessMessage}: any) {
+    return (
+        <div className="success" style={{ display: displaySuccessMessage }}>
+            <div className="message">
+                <h1><i className="fa-solid fa-check"></i></h1>
+                <h3>Inscription effectuée</h3>
+                <p>Connecter à votre compte pour effectuer de réservation</p>
+                <button className="btn" onClick={ () => setDisplaySucessMessage("none") }>Compris</button>
+            </div>
+        </div>
+    );
+}
 function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
     const [mdp, setMdp] = useState(""); // different de sendMdp
     const [showMdpInfo, setShowMdpInfo] = useState("none"); // show if mdp.length < 8
     const [confirmation, setConfirmation] = useState(""); // mdp confirmation
     const [showConfirmationInfo, setShowConfirmationInfo] = useState("none"); // show if mdp != confirmation
+    const [validerLabel, setValiderLabel] = useState("Valider");
     
     function checkMdp(mdp: string) {
         setMdp(mdp);
@@ -266,23 +283,25 @@ function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
     }
 
     function validateForm() {
-        // alert(`mdp = ${mdp} and confirm = ${confirmation}`);
-        sendMdp(mdp); // joker ty => setMpd
+        setValiderLabel("...");
+        setTimeout(() => {
+            // alert(`mdp = ${mdp} and confirm = ${confirmation}`);
+            sendMdp(mdp); // joker ty => setMpd
 
-        // clear form
-        setMdp("");
-        setConfirmation("");
-        
-        // hide all error message
-        setShowMdpInfo("none");
-        setShowConfirmationInfo("none");
-        
-        // hide confirm form
-        setShowConfirmMdp("none"); // manage ConfirmMdp component
+            // clear form
+            setMdp("");
+            setConfirmation("");
+            
+            // hide all error message
+            setShowMdpInfo("none");
+            setShowConfirmationInfo("none");
+            // hide confirm form
+            setShowConfirmMdp("none"); // manage ConfirmMdp component
+            setValiderLabel("Valider");
+        }, 1000)
     }
 
     function quitConfirmForm() {
-        // alert("clicked = " + showConfirmMdp);
         setMdp("");
         setConfirmation("");
         setShowMdpInfo("none");
@@ -307,10 +326,10 @@ function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
                         <p style={ { color: "red", display: showConfirmationInfo } }><small>Erreur de la confirmation</small></p>
                     </div>
                     <div className="form-group">
-                        <input type="button" disabled={ isCorrect() } onClick={ () => validateForm() } className="form-control btn btn-primary" value={ "Valider" } style={ { marginTop: "8px" } } />
+                        <button disabled={ isCorrect() } onClick={ () => validateForm() } className="form-control btn btn-valider" style={ { marginTop: "8px" } }>{validerLabel}</button>
                     </div>
                     <div className="form-group">
-                        <input type="button" onClick={ () => quitConfirmForm() } className="form-control btn cancel" value={ "Annuler" } style={ { marginTop: "8px" } } />
+                        <button onClick={ () => quitConfirmForm() } className="form-control btn cancel" style={ { marginTop: "8px" } }><i className="fa-solid fa-arrow-left"></i> Retour</button>
                     </div>
                 </div>
             </div>
@@ -331,41 +350,41 @@ function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) 
         const client = new Client();
         client.obtenirClientByTel(telEmail)
             .then((telFound) => { // if tel entered
-                if(telFound.data.length > 0) {
-                    const data = telFound.data;
-                    for(const elem of data) {
-                        if(elem.mdp == mdp) { // correct mdp with tel entered
-                            // alert("Correct tel");
-                            setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "none" });
-                            connect(elem);
-                            break;
-                        }else {
-                            setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "inline" });
-                        }
-                    }
-                    setNope("none");
-                }else {
-                    client.obtenirClientByEmail(telEmail)
-                        .then((emailFound) => { // if email entered
-                            if(emailFound.data.length > 0) {
-                                const data = emailFound.data;
-                                for(const elem of data) {
-                                    if(elem.mdp == mdp) { // correct mdp with email entered
-                                        // alert("Correct email")// correct mdp with email entered
-                                        setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "none" });
-                                        connect(elem);
-                                        break;
-                                    }else {
-                                        setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "inline" });
-                                    }
-                                }
-                                setNope("none");
-                            }else { // nope: sady tsy email no tel
-                                setIsCorrect({ telEmail: "none", mdp: "none" }) // no email and no tel
-                                setNope("inline");
-                            }
-                        })
-                }
+               if(telFound.data.length > 0) {
+                   const data = telFound.data;
+                   for(const elem of data) {
+                       if(elem.mdp == mdp) { // correct mdp with tel entered
+                           // alert("Correct tel");
+                           setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "none" });
+                           connect(elem);
+                           break;
+                       }else {
+                           setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "inline" });
+                       }
+                   }
+                   setNope("none");
+               }else {
+                   client.obtenirClientByEmail(telEmail)
+                       .then((emailFound) => { // if email entered
+                           if(emailFound.data.length > 0) {
+                               const data = emailFound.data;
+                               for(const elem of data) {
+                                   if(elem.mdp == mdp) { // correct mdp with email entered
+                                       // alert("Correct email")// correct mdp with email entered
+                                       setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "none" });
+                                       connect(elem);
+                                       break;
+                                   }else {
+                                       setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "inline" });
+                                   }
+                               }
+                               setNope("none");
+                           }else { // nope: sady tsy email no tel
+                               setIsCorrect({ telEmail: "none", mdp: "none" }) // no email and no tel
+                               setNope("inline");
+                           }
+                       })
+               }
             })
     }
 
@@ -439,7 +458,7 @@ function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) 
                         ((mdp == '') || (telEmail == ''))
                             ? true
                             : false
-                        } className="form-control btn btn-primary" style={ { marginTop: "8px" } }><i className="fa-solid fa-sign-in"></i></button>
+                        } className="form-control btn btn-connex" style={ { marginTop: "8px" } }><i className="fa-solid fa-sign-in"></i></button>
                 </div>
                 <p style={ { padding: "8px", color: "red", display: nope } }><small>Compte introuvable !</small></p><br />
                 <p style={ { padding: "8px", color: "green", display: nope } }><small>Vérifiez bien vos informations</small></p>

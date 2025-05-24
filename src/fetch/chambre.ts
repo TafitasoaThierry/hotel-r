@@ -7,7 +7,7 @@ const get: string = "/getReservationList";
 const update: string = "/updateReservation";
 const remove: string = "/deleteReservation";
 
-class Reservation {
+class Chambre {
     // private numero: string = ""; // ID
     // private type: string = "";
     // private status: string = "";
@@ -33,4 +33,4 @@ class Reservation {
     }
 }
 
-export default Reservation;
+export default Chambre;

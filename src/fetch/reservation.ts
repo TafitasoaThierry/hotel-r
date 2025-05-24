@@ -13,14 +13,17 @@ class Reservation {
     // private dateDebut: Date = new Date();
     // private dateFin: Date = new Date();
     // private status: string = "";
+    // private nbPersonne: number;
+    // private nbChambre: number;
+    // private numeroClient: number;
 
     public obtenirListeReservation() {
         const fetch = axios.get(host + get);
         return fetch;
     }
 
-    public faireReservation() { // => ajouter Reservation
-        const fetch = axios.post(host + post);
+    public faireReservation(reservation: any) { // => ajouter Reservation
+        const fetch = axios.post(host + post, reservation);
         return fetch;
     }
 

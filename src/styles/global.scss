@@ -42,7 +42,7 @@ $tr: 0.3s;
 */
 .header {
     @include ths.flex(row, center, space-between);
-    padding: 0px ($px * 20);
+    padding: 0px ($px * 10);
     position: fixed;
     top: 0;
     width: 100%;
@@ -86,11 +86,16 @@ $tr: 0.3s;
         @include ths.flex();
         font-family: Roboto;
         padding: calc($px * 3 / 2);
-
-        .user {
-            outline: none;
-            border: none;
-            color: $col2;
+        
+        .status {
+            .btn-user {
+                border: 1px solid $col3;
+                background-color: $col3;
+                color: $col1;
+                margin: $px;
+                padding: $px 12px;
+                border-radius: 100%;
+            }
         }
         .btn-connecter, .btn-deconnecter {
             padding: calc($px * 3 / 2);
@@ -119,7 +124,7 @@ $tr: 0.3s;
         padding: 0px ($px);
     }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 835px) {
     .header {
         .menu {
             display: none;
@@ -128,11 +133,21 @@ $tr: 0.3s;
             display: none;
         }
         .drop-down {
-            display: block;
+            @include ths.flex();
             font-family: Roboto;
             margin-top: $px * 2;
             transition: all $tr;
 
+            .status {
+                .btn-user {
+                    border: 1px solid $col3;
+                    background-color: $col3;
+                    color: $col1;
+                    margin: $px;
+                    padding: $px 12px;
+                    border-radius: 100%;
+                }
+            }
             .current {
                 @include ths.flex();
                 color: $col2;
@@ -208,7 +223,8 @@ $tr: 0.3s;
             }
         }
         .drop-down:hover .drop-down-menu {
-            display: block;
+            display: inline;
+            top: $px * 9;
         }
         .drop-down:visited .drop-down-menu {
             display: none;

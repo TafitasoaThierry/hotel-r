@@ -5,18 +5,13 @@ import Person from './person.ts';
 const post: string = "/addClient";
 const get: string = "/getClientList"; // liste globale
 // const getClientById = "/getClientById";
-const getClientByTel = "/getClientByTel"; // obtenir * client par le numero tel
-const getClientByEmail = "/getClientByEmail"; // obtenir * client par email
+const getClientByTel = "/getClientByTel"; // obtenir * client par le numero tel => (tout)
+const getClientByEmail = "/getClientByEmail"; // obtenir * client par email => (tout)
 const update: string = "/updateClient";
 const remove: string = "/deleteClient";
 
 class Client extends Person {
-    //private numeroClient: number = 9; // auto increment, ID
-
-    // public constructor() {
-    //     super();
-    //     this.numeroClient = 0;
-    // }
+    // private numeroClient: number = 9; // auto increment, ID
 
     public obtenirListeClient() {
         const fetch = axios.get(host + get);
