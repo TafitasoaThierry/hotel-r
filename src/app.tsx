@@ -14,7 +14,7 @@ export default function App() {
     const [showDeconnecterModal, setShowDeconnecterModal] = useState("none");
     const [name, setName] = useState(".");
 
-    /**i
+    /**
      * onpopstate: to detect go forward() and back() history event
      */
     window.onpopstate = () => {

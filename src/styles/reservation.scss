@@ -22,18 +22,59 @@ font-face {
     font-display: fallback;
 }
 
-.errorMsg {
+.connexionStatus {
     text-align: center;
-    color: green;
+    color: $col1;
     border: 1px solid green;
     background-color: green;
+    animation: infoMsg 3s;
+    padding: $px;
+    position: fixed;
+    right: $px * 10;
+    top: $px * 9;
+    border-radius: $px * 2;
+    z-index: 500;
+    
+    @keyframes infoMsg {
+        from {
+            opacity: 0;
+        }to {
+            opacity: 1;
+        }
+    }
+}
+.connexionStatus::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent green transparent;
+}
+@media screen and (max-width: 1100px) {
+    .connexionStatus {
+        right: $px * 2;
+    }
+}
+@media screen and (max-width: 530px) {
+    .connexionStatus {
+        top: $px * 13;
+    }
+}
+.errorMsg {
+    text-align: center;
     color: $col1;
+    border: 1px solid green;
+    background-color: green;
     animation: errorMsg 2s;
+    animation-timeline: view();
     padding: $px;
     position: fixed;
     right: $px;
     bottom: $px;
-    border-radius: $px*2;
+    border-radius: $px * 2;
     z-index: 500;
 
     @keyframes errorMsg {
@@ -44,20 +85,13 @@ font-face {
         }
     }
 }
-.fa-info {
-    color: $col1;
-    border: 2px solid $col1;
-    padding: $px/2 $px;
-    margin: $px 0px $px $px;
-    border-radius: $px*4;
-}
 .infoMsg {
     text-align: center;
-    color: green;
+    color: $col1;
     border: 1px solid green;
     background-color: green;
-    color: $col1;
     animation: infoMsg 4s;
+    animation-timeline: view();
     padding: $px;
     position: fixed;
     right: $px;
@@ -74,15 +108,21 @@ font-face {
         }
     }
 }
+.fa-info {
+    border: 2px solid $col1;
+    padding: $px/2 $px;
+    margin: $px 0px $px $px;
+    border-radius: $px*4;
+}
 
 // @media screen  {
-//    
+//
 // }
 
 .errorMsg::after, .infoMsg::after {
     content: " ";
     position: absolute;
-    bottom: 100%;  /* At the top of the tooltip */
+    bottom: 100%;
     left: 20%;
     margin-left: -10px;
     border-width: 10px;
@@ -96,7 +136,6 @@ font-face {
     margin-top: 80px;
     font-family: Roboto;
     
-
     .offres {
         border: 1px solid #00000034;
         transition: $tr;
@@ -216,6 +255,28 @@ font-face {
                 .form-control {
                     width: 100%;
                 }
+            }
+        }
+    }
+}
+.image-container {
+    @include ths.flex();
+    height: 100vh;
+    
+    .chambre-description {
+        @include ths.flex();
+        gap: 1rem;
+        position: absolute;
+        .image {
+            width: 350px;
+            height: 300px;
+            animation: image 4s;
+        }
+        @keyframes image {
+            from {
+                opacity: 0;
+            }to {
+                opacity: 1;
             }
         }
     }

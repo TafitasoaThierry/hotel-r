@@ -2,6 +2,10 @@ import "../styles/reservation.scss";
 import queen from "../assets/image/queen.png";
 import king from "../assets/image/king.png";
 import twin from "../assets/image/twin.png";
+import chambre1 from "../assets/image/chambre1.png";
+import chambre2 from "../assets/image/chambre2.png";
+import chambre3 from "../assets/image/chambre3.png";
+import chambre4 from "../assets/image/chambre4.png";
 import ReservationObject from "../fetch/reservation";
 import { useEffect, useState } from "react";
 
@@ -18,6 +22,7 @@ export default function Reservation() {
         matricule: "non-designé"
     })
     const [isConnected, setIsConnected] = useState(false);
+    const [showInfo, setShowInfo] = useState("none");
 
     useEffect(() => {
         const user:any = localStorage.getItem("user");
@@ -53,20 +58,20 @@ export default function Reservation() {
             return { ...previousState, dateReservation: setDateFormat(date.getDate().toString(), date.getMonth().toString(), date.getFullYear().toString()) }
         })
     }, [new Date().getDate()])
-    
+
     function reserver() {
         const newReservation = new ReservationObject();
-        console.log(reservation);
         newReservation.faireReservation(reservation)
-        .then((r) => {
-            console.log(r.data);
+        .then((response) => {
+            console.log("reservation with status " + response.status);
         })
     }
 
     return (
         <div className="reservation">
+            <SlideShow />
             <h5>Types de chambre</h5>
-            <p style={{ color: "green", display: isConnected ? "none" : "inline" }}><small>(Vous n'êtes pas encore connecter)</small></p>
+            <p style={{ display: isConnected ? "none" : "inline" }} className="connexionStatus"><small>Vous n'êtes pas connecté</small></p>
             <div className="offres">
                 <div className="box">
                     <input type="radio" name="choix" className="radio" onChange={() => {
@@ -98,9 +103,9 @@ export default function Reservation() {
                     <label>2 Lits</label>
                     <img src={ twin } alt="deluxe" />
                 </div>
-                <button className="question"><i className="fa-solid fa-question"></i> En savoir plus</button>
+                <button className="question" onClick={ () => setShowInfo("block-inline") }><i className="fa-solid fa-question"></i> En savoir plus</button>
             </div>
-            
+
             <div className="container">
                 <h5>Formulaire de réservation</h5>
                 <p className="errorMsg" style={{ display: errorMsg() }}><i className="fa-solid fa-info"></i> Date de réservation invalide</p>
@@ -137,9 +142,7 @@ export default function Reservation() {
                         }} />
                     </div>
                     <div className="form-group">
-                        <button className="form-control btn" onClick={reserver}
-                            disabled={ disabledBtn() }
-                        ><i className="fa-solid fa-calendar"></i> Réserver</button>
+                        <button className="form-control btn" onClick={reserver} disabled={ disabledBtn() }><i className="fa-solid fa-calendar"></i> Réserver</button>
                     </div>
                 </div>
             </div>
@@ -155,9 +158,9 @@ export default function Reservation() {
     }
     function disabledBtn() {
         if(
-            (isConnected == false) || 
-            (reservation.type == "") || 
-            (compare(reservation.dateDebut, reservation.dateFin)) || 
+            (isConnected == false) ||
+            (reservation.type == "") ||
+            (compare(reservation.dateDebut, reservation.dateFin)) ||
             (reservation.dateDebut == "") ||
             (reservation.dateFin == "") ||
             (reservation.dateDebut == reservation.dateFin && reservation.dateDebut != "") ||
@@ -183,14 +186,15 @@ export default function Reservation() {
     }
 }
 
-// function ChambreDescription() {
-//     return (
-//         <div className="cotainer">
-//             <div className="chambre-description">
-//                 <div className="standard"></div>
-//                 <div className=""></div>
-//                 <div></div>
-//             </div>
-//         </div>
-//     );
-// }
+function SlideShow() {
+    return (
+        <div className="image-container">
+            <div className="chambre-description">
+                <img src={ chambre1 } alt="image" className="image img1" />
+                <img src={ chambre2 } alt="image" className="image img2" />
+                <img src={ chambre3 } alt="image" className="image img3" />
+                <img src={ chambre4 } alt="image" className="image img4" />
+            </div>
+        </div>
+    );
+}
