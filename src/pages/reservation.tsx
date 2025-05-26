@@ -22,7 +22,7 @@ export default function Reservation() {
         matricule: "non-designé"
     })
     const [isConnected, setIsConnected] = useState(false);
-    const [showInfo, setShowInfo] = useState("none");
+    // const [showInfo, setShowInfo] = useState("none");
 
     useEffect(() => {
         const user:any = localStorage.getItem("user");
@@ -103,7 +103,8 @@ export default function Reservation() {
                     <label>2 Lits</label>
                     <img src={ twin } alt="deluxe" />
                 </div>
-                <button className="question" onClick={ () => setShowInfo("block-inline") }><i className="fa-solid fa-question"></i> En savoir plus</button>
+                {/* onClick={ () => setShowInfo("block-inline") } */}
+                <button className="question"><i className="fa-solid fa-question"></i> En savoir plus</button>
             </div>
 
             <div className="container">
