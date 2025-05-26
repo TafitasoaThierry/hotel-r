@@ -183,14 +183,14 @@ export default function Reservation() {
     }
 }
 
-function ChambreDescription() {
-    return (
-        <div className="cotainer">
-            <div className="chambre-description">
-                <div className="standard"></div>
-                <div className=""></div>
-                <div></div>
-            </div>
-        </div>
-    );
-}
+// function ChambreDescription() {
+//     return (
+//         <div className="cotainer">
+//             <div className="chambre-description">
+//                 <div className="standard"></div>
+//                 <div className=""></div>
+//                 <div></div>
+//             </div>
+//         </div>
+//     );
+// }
