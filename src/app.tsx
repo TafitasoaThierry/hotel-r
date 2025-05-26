@@ -105,7 +105,7 @@ export default function App() {
                         <li><Link to={ "/" } className="link" onClick={ () => setCurrent("Accueil") }><i className="fa-solid fa-home"></i>Accueil</Link></li>
                         <li><Link to={ "/reservation" } className="link" onClick={ () => setCurrent("Réservation") }><i className="fa-solid fa-calendar"></i>Réservation</Link></li>
                         <li><Link to={ "/contact" } className="link" onClick={ () => setCurrent("Contact") }><i className="fa-solid fa-phone"></i>Contact</Link></li>
-                        <li><Link to={ "?" } className="link"><i className="fa-solid fa-edit"></i>Editer</Link></li>
+                        <li><Link to={ "?" } style={ { display: displayUserStatus } } className="link"><i className="fa-solid fa-edit"></i>Editer</Link></li>
                         <li className="sign-btn" style={ { display: displayUserStatus == "block" ? "none" : "block" } }><Link to={ "/auth" } className="user-btn" onClick={ () => setCurrent("Connexion") }><i className="fa-solid fa-sign-in"></i> Se connecter</Link></li>
                         <li className="sign-btn" style={ { display: displayUserStatus } }><Link to={ "?" } className="user-btn" onClick={ () => seDeconnecter() }><i className="fa-solid fa-sign-out"></i> Se déconnecter</Link></li>
                     </div>

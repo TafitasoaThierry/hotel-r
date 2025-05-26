@@ -189,7 +189,7 @@ function Creation({ setShowConnexion, setDisplaySuccessMessage }: any) {
     }
 
     return (
-        <div className="container">
+        <div className="auth-container">
             <div className="auth">
                 <div className="form creation">
                     <div className="form-header">

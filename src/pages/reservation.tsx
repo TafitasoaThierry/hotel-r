@@ -57,10 +57,10 @@ export default function Reservation() {
     function reserver() {
         const newReservation = new ReservationObject();
         console.log(reservation);
-        // newReservation.faireReservation(reservation)
-        // .then((r) => {
-        //     console.log(r.data);
-        // })
+        newReservation.faireReservation(reservation)
+        .then((r) => {
+            console.log(r.data);
+        })
     }
 
     return (
@@ -103,12 +103,14 @@ export default function Reservation() {
             
             <div className="container">
                 <h5>Formulaire de réservation</h5>
+                <p className="errorMsg" style={{ display: errorMsg() }}><i className="fa-solid fa-info"></i> Date de réservation invalide</p>
+                <p className="infoMsg" style={{ display: reservation.type == "" ? "inline" : "none" }}><i className="fa-solid fa-info"></i> Choisir la type de chambre</p>
                 <div className="form">
                     <div className="form-group">
                         <label>Nombre de personne</label>
                         <input type="number" className="form-control" min={1} max={30} value={ reservation.nbPersonne > 30 ? 30 : reservation.nbPersonne } onChange={(e) => {
                             setReservation(previousState => {
-                                return { ... previousState, nbPersonne: parseInt(e.target.value) }
+                                return { ... previousState, nbPersonne: parseInt(e.target.value) ? parseInt(e.target.value) : 1 }
                             });
                         }} placeholder="Nombre de personne" />
                     </div>
@@ -130,7 +132,7 @@ export default function Reservation() {
                         <label>Nombre de chambre</label>
                         <input type="number" className="form-control" min={1} max={30} maxLength={3} placeholder="Nombre de chambre" value={ reservation.nbChambre > 30 ? 30 : reservation.nbChambre } onChange={(e) => {
                             setReservation(previousState => {
-                                return { ... previousState, nbChambre: parseInt(e.target.value) }
+                                return { ... previousState, nbChambre: parseInt(e.target.value) ? parseInt(e.target.value) : 1 }
                             });
                         }} />
                     </div>
@@ -139,13 +141,18 @@ export default function Reservation() {
                             disabled={ disabledBtn() }
                         ><i className="fa-solid fa-calendar"></i> Réserver</button>
                     </div>
-                    <p className="errorMsg" style={{ 
-                        display: compare(reservation.dateDebut, reservation.dateFin) ? "inline": "none" 
-                    }}><i className="fa-solid fa-info"></i> Entrer une date correcte</p>
                 </div>
             </div>
         </div>
     );
+    function errorMsg() {
+        const dateDeb = reservation.dateDebut;
+        const dateFin = reservation.dateFin;
+        if(compare(dateDeb, dateFin) && (dateDeb != "") && (dateFin != "")){
+            return "inline";
+        }
+        return "none";
+    }
     function disabledBtn() {
         if(
             (isConnected == false) || 
@@ -174,4 +181,16 @@ export default function Reservation() {
         }
         return false;
     }
+}
+
+function ChambreDescription() {
+    return (
+        <div className="cotainer">
+            <div className="chambre-description">
+                <div className="standard"></div>
+                <div className=""></div>
+                <div></div>
+            </div>
+        </div>
+    );
 }

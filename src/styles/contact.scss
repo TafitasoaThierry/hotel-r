@@ -1,5 +1,26 @@
-@use "ths.scss";
+@use './ths.scss';
 
-.contact {
-    @include ths.flex();
+$px: 8px;
+$col1: #ffffff;
+$col2: #295cb9;
+$col3: #555555;
+$tr: 0.3s;
+
+
+@font-face {
+    font-family: Roboto;
+    src: url('../assets/fonts/Roboto_Condensed-Medium.ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: fallback;
+}
+
+.contact-container {
+    @include ths.flex(column, center, center);
+    height: 100vh;
+    font-family: Roboto;
+    .contact {
+        padding: $px * 2;
+        border: 1px solid rgba($color: $col3, $alpha: 1.0);
+    }
 }

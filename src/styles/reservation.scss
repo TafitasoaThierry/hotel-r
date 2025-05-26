@@ -22,6 +22,74 @@ font-face {
     font-display: fallback;
 }
 
+.errorMsg {
+    text-align: center;
+    color: green;
+    border: 1px solid green;
+    background-color: green;
+    color: $col1;
+    animation: errorMsg 2s;
+    padding: $px;
+    position: fixed;
+    right: $px;
+    bottom: $px;
+    border-radius: $px*2;
+    z-index: 500;
+
+    @keyframes errorMsg {
+        from {
+            opacity: 0;
+        }to {
+            opacity: 1;
+        }
+    }
+}
+.fa-info {
+    color: $col1;
+    border: 2px solid $col1;
+    padding: $px/2 $px;
+    margin: $px 0px $px $px;
+    border-radius: $px*4;
+}
+.infoMsg {
+    text-align: center;
+    color: green;
+    border: 1px solid green;
+    background-color: green;
+    color: $col1;
+    animation: infoMsg 4s;
+    padding: $px;
+    position: fixed;
+    right: $px;
+    bottom: $px;
+    border-radius: $px*2;
+    z-index: 400;
+    opacity: 1;
+
+    @keyframes infoMsg {
+        from {
+            opacity: 0;
+        }to {
+            opacity: 1;
+        }
+    }
+}
+
+// @media screen  {
+//    
+// }
+
+.errorMsg::after, .infoMsg::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 20%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent green transparent;
+}
+
 .reservation {
     @include ths.flex(column, center, center);
     gap: 1rem;
@@ -74,7 +142,7 @@ font-face {
             padding: $px;
 
             .fa-question {
-                padding: $px;
+                padding: $px*2/3 $px;
                 border-radius: 100%;
                 background-color: $col2;
                 color: $col1;
@@ -137,7 +205,7 @@ font-face {
     }
     @media screen and (max-width: 460px) {
         .form {
-            padding: $px*2;
+            padding: $px * 2;
             .form-group {
                 margin: 0px;
                 @include ths.flex(column, start, start);
