@@ -27,10 +27,12 @@ font-face {
     gap: 1rem;
     margin-top: 80px;
     font-family: Roboto;
+    
 
     .offres {
         border: 1px solid #00000034;
         transition: $tr;
+        margin: $px;
 
         .box {
             @include ths.flex(row, center, space-between);
@@ -82,20 +84,30 @@ font-face {
     .offres:hover {
         box-shadow: 1px 1px 5px 0px rgba($color: $col2, $alpha: 0.4);
     }
-    .container {
-        // height: 100vh;
-        // @include ths.flex(column, center, center);
+    @media screen and (max-width: 450px) {
+        .offres {
+            margin: 0px $px;
+            width: 98%;
+
+            .box {
+                margin: 2% $px;
+                width: auto;
+            }
+        }
+    }
+    h5 {
+        text-align: center;
     }
     .form {
         @include ths.flex(row, center, center);
         gap: 1rem;
         font-family: Roboto;
         padding: $px;
+        margin: 0px 0px $px * 5 0px;
         border: 1px solid #00000034;
         transition: $tr;
-        h5 {
-            padding: $px;
-        }
+        color: $col3;
+        
         .form-group {
             margin: $px;
             @include ths.flex(row, center, center);
@@ -114,5 +126,29 @@ font-face {
     }
     .form:hover, .form:focus {
         box-shadow: 1px 1px 5px 0px rgba($color: $col2, $alpha: 0.4);
+    }
+    @media screen and (max-width: 1200px) {
+        .form {
+            @include ths.flex(column, center, center);
+            .form-group {
+                width: 100%;
+            }
+        }
+    }
+    @media screen and (max-width: 460px) {
+        .form {
+            padding: $px*2;
+            .form-group {
+                margin: 0px;
+                @include ths.flex(column, start, start);
+
+                label {
+                    margin: -$px 0px -$px 0px;
+                }
+                .form-control {
+                    width: 100%;
+                }
+            }
+        }
     }
 }

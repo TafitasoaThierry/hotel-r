@@ -344,7 +344,7 @@ function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) 
         telEmail: "none",
         mdp: "none"
     });
-    const [nope, setNope] = useState("none"); // not in the database
+    const [nope, setNope] = useState("none"); // email and tel not in the database
 
     const seConnecter = () => {
         const client = new Client();

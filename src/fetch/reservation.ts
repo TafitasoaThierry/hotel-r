@@ -7,23 +7,24 @@ const update: string = "/updateReservation";
 const remove: string = "/deleteReservation";
 
 class Reservation {
-    // private ref: number = 0; // auto increment, ID
-    // private type: string = "";
-    // private dateReservation: Date = new Date();
-    // private dateDebut: Date = new Date();
-    // private dateFin: Date = new Date();
-    // private status: string = "";
+    // private ref: number; // auto increment, ID
+    // private type: string;
+    // private dateReservation: Date;
+    // private dateDebut: Date;
+    // private dateFin: Date;
+    // private status: string;
     // private nbPersonne: number;
     // private nbChambre: number;
-    // private numeroClient: number;
+    // private numeroClient: number; // FK
+    // private matricule: string; // FK
 
     public obtenirListeReservation() {
         const fetch = axios.get(host + get);
         return fetch;
     }
 
-    public faireReservation(reservation: any) { // => ajouter Reservation
-        const fetch = axios.post(host + post, reservation);
+    public faireReservation(newReservation: any) { // => ajouter reservation
+        const fetch = axios.post(host + post, newReservation);
         return fetch;
     }
 

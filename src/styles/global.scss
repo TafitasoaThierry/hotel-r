@@ -47,7 +47,7 @@ $tr: 0.3s;
     top: 0;
     width: 100%;
     backdrop-filter: blur($px);
-    z-index: 1000;
+    z-index: 500;
 
     .logo-field {
         @include ths.flex(row, end, center);
@@ -135,17 +135,17 @@ $tr: 0.3s;
         .drop-down {
             @include ths.flex();
             font-family: Roboto;
-            margin-top: $px * 2;
+            margin-top: $px;
             transition: all $tr;
 
             .status {
                 .btn-user {
                     border: 1px solid $col3;
+                    border-radius: 100%;
                     background-color: $col3;
                     color: $col1;
                     margin: $px;
                     padding: $px 12px;
-                    border-radius: 100%;
                 }
             }
             .current {
@@ -175,6 +175,7 @@ $tr: 0.3s;
                 display: none;
                 width: 240px;
                 position: absolute;
+                top: $px * 8;
                 right: $px;
                 z-index: 200;
                 background-color: $col1;
@@ -214,7 +215,7 @@ $tr: 0.3s;
                 }
                 @keyframes menu {
                     from {
-                        right: -($px * 2);
+                        right: -($px * 4);
                     }
                     to {
                         right: $px;
@@ -224,11 +225,11 @@ $tr: 0.3s;
         }
         .drop-down:hover .drop-down-menu {
             display: inline;
-            top: $px * 9;
         }
-        .drop-down:visited .drop-down-menu {
+        .link:focus .drop-down-menu {
             display: none;
         }
+        
         .drop-down:hover .bar {
             rotate: 90deg;
         }
@@ -534,6 +535,23 @@ $tr: 0.3s;
             opacity: 1;
         }
         
+    }
+}
+
+.history {
+    position: fixed;
+    right: $px * 5;
+    bottom: $px * 5;
+    .fa-history {
+        border: 1px solid $col2;
+        font-size: 30px;
+        padding: $px;
+        background-color: $col2;
+        color: $col1;
+        border-radius: 100%;
+        z-index: 1000;
+        width: 50px;
+        height: 50px;
     }
 }
 

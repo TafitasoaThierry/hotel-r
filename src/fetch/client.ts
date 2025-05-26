@@ -4,9 +4,9 @@ import Person from './person.ts';
 
 const post: string = "/addClient";
 const get: string = "/getClientList"; // liste globale
-// const getClientById = "/getClientById";
-const getClientByTel = "/getClientByTel"; // obtenir * client par le numero tel => (tout)
-const getClientByEmail = "/getClientByEmail"; // obtenir * client par email => (tout)
+const getClientById = "/getClientByNumeroClient"; // By ID
+const getClientByTel = "/getClientByTel"; // obtenir * client par le numero tel => (tout client avec le tel en parametre)
+const getClientByEmail = "/getClientByEmail"; // obtenir * client par email => (tout client avec l'email en parametre)
 const update: string = "/updateClient";
 const remove: string = "/deleteClient";
 
@@ -15,6 +15,11 @@ class Client extends Person {
 
     public obtenirListeClient() {
         const fetch = axios.get(host + get);
+        return fetch;
+    }
+
+    public obtenirClientByNumeroClient(numeroClient: any) {
+        const fetch = axios.get(host + getClientById + "/" + numeroClient);
         return fetch;
     }
 
