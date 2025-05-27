@@ -110,7 +110,7 @@ font-face {
 }
 .fa-info {
     border: 2px solid $col1;
-    padding: $px/2 $px;
+    padding: calc($px / 2) $px;
     margin: $px 0px $px $px;
     border-radius: $px*4;
 }
@@ -146,7 +146,7 @@ font-face {
             width: 400px;
             border: 1px solid #00000056;
             margin: $px;
-            padding: $px/2 $px*2;
+            padding: calc($px / 2) $px*2;
             transition: $tr;
             color: $col3;
             font-weight: bold;
@@ -181,7 +181,7 @@ font-face {
             padding: $px;
 
             .fa-question {
-                padding: $px*2/3 $px;
+                padding: calc($px * 2 / 3) $px;
                 border-radius: 100%;
                 background-color: $col2;
                 color: $col1;
@@ -250,7 +250,7 @@ font-face {
                 @include ths.flex(column, start, start);
 
                 label {
-                    margin: -$px 0px -$px 0px;
+                    margin: (-$px) (0px) (-$px) (0px);
                 }
                 .form-control {
                     width: 100%;
@@ -261,16 +261,19 @@ font-face {
 }
 .image-container {
     @include ths.flex();
-    height: 100vh;
+    height: 90vh;
+    margin-top: -40px;
     
-    .chambre-description {
+    .chambre {
         @include ths.flex();
+        width: 95%;
+        overflow-x: scroll;
         gap: 1rem;
         position: absolute;
         .image {
-            width: 350px;
-            height: 300px;
-            animation: image 4s;
+            width: auto;
+            height: 90vh;
+            animation: image 2s;
         }
         @keyframes image {
             from {

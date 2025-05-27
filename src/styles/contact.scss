@@ -19,8 +19,24 @@ $tr: 0.3s;
     @include ths.flex(column, center, center);
     height: 100vh;
     font-family: Roboto;
+    color: $col3;
+
     .contact {
         padding: $px * 2;
-        border: 1px solid rgba($color: $col3, $alpha: 1.0);
+        border: 1px solid rgba($color: $col2, $alpha: 0.3);
+        box-shadow: 2px 2px 200px 2px rgba($color: $col2, $alpha: 0.5);
+        animation: contact 1.5s;
+    }
+    @media screen and (max-width: 330px) {
+        .contact {
+            width: 100%;
+        }
+    }
+    @keyframes contact {
+        from {
+            opacity: 0;
+        }to {
+            opacity: 1;
+        }
     }
 }

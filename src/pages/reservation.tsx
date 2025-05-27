@@ -2,10 +2,10 @@ import "../styles/reservation.scss";
 import queen from "../assets/image/queen.png";
 import king from "../assets/image/king.png";
 import twin from "../assets/image/twin.png";
-import chambre1 from "../assets/image/chambre1.png";
-import chambre2 from "../assets/image/chambre2.png";
-import chambre3 from "../assets/image/chambre3.png";
-import chambre4 from "../assets/image/chambre4.png";
+import chambre1 from "../assets/image/chambre1.jpg";
+import chambre2 from "../assets/image/chambre2.jpg";
+import chambre3 from "../assets/image/chambre3.jpg";
+import chambre4 from "../assets/image/chambre4.jpg";
 import ReservationObject from "../fetch/reservation";
 import { useEffect, useState } from "react";
 
@@ -22,7 +22,6 @@ export default function Reservation() {
         matricule: "non-designé"
     })
     const [isConnected, setIsConnected] = useState(false);
-    // const [showInfo, setShowInfo] = useState("none");
 
     useEffect(() => {
         const user:any = localStorage.getItem("user");
@@ -190,7 +189,7 @@ export default function Reservation() {
 function SlideShow() {
     return (
         <div className="image-container">
-            <div className="chambre-description">
+            <div className="chambre">
                 <img src={ chambre1 } alt="image" className="image img1" />
                 <img src={ chambre2 } alt="image" className="image img2" />
                 <img src={ chambre3 } alt="image" className="image img3" />
