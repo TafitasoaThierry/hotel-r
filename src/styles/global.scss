@@ -226,6 +226,9 @@ $tr: 0.3s;
         .drop-down:hover .drop-down-menu {
             display: inline;
         }
+        .drop-down:focus .drop-down-menu {
+            display: inline;
+        }
         .link:focus .drop-down-menu {
             display: none;
         }

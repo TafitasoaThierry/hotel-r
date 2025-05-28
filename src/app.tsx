@@ -2,6 +2,7 @@ import Accueil from "./pages/accueil";
 import Reservation from "./pages/reservation";
 import Contact from "./pages/contact";
 import Auth from "./pages/auth";
+import Admin from "./pages/admin";
 import logo from "./assets/image/hotel.png";
 import { BrowserRouter, Routes, Route, Link } from "react-router";
 import { useEffect, useState } from "react";
@@ -76,7 +77,8 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <div className="header">
+            <div className="header" style={{ display: 
+                window.location.pathname == "/admin" ? "none" : "flex" }}>
                 <div className="logo-field">
                     <img src={logo} alt="logo" className="logo" />
                     <span>HOTEL</span>
@@ -123,6 +125,8 @@ export default function App() {
                     <Route path="/reservation" element={ <Reservation /> } />
                     <Route path="/contact" element={ <Contact /> } />
                     <Route path="/auth" element={ <Auth setCurrent={ setCurrent } setDisplayUserStatus={ setDisplayUserStatus } /> } />
+
+                    <Route path="/admin" element={ <Admin /> } />
                 </Routes>
             </div>
             {/* <div className="footer">
