@@ -8,3 +8,6 @@
 4) npm run dev
 
 5) 0)
+
+client: http://localhost:5173
+admin: http://localhost:5173/admin

@@ -1,0 +1,45 @@
+@use "ths.scss";
+
+$col1: #ffffff;
+$col2: #ffffff;
+$col3: #ffaaff;
+$transition: all 0.3s;
+$border: 8px;
+$px: 8px;
+
+@font-face {
+    font-family: Roboto;
+    src: url('../assets/fonts/Roboto_Condensed-Medium.ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: fallback;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+
+.admin {
+    @include ths.flex();
+    .menu-container {
+        width: 20%;
+    }
+    .content-container {
+        width: 80%;
+        height: 100vh;
+    }
+}
+.menu {
+    background-image: linear-gradient(to bottom right, rgb(32, 29, 66), rgb(10, 67, 90));
+    height: 100vh;
+    li {
+        list-style: none;
+        .link {
+            color: $col1;
+            text-decoration: none;
+        }
+    }
+}

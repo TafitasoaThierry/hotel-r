@@ -2,7 +2,10 @@ import Accueil from "./pages/accueil";
 import Reservation from "./pages/reservation";
 import Contact from "./pages/contact";
 import Auth from "./pages/auth";
-import Admin from "./pages/admin";
+import Admin from "./pages/admin/admin";
+import Chambre from "./pages/admin/chambre";
+import ClientComp from "./pages/admin/client";
+import Dashboard from "./pages/admin/dashboard";
 import logo from "./assets/image/hotel.png";
 import { BrowserRouter, Routes, Route, Link } from "react-router";
 import { useEffect, useState } from "react";
@@ -70,15 +73,14 @@ export default function App() {
         setShowDeconnecterModal("block");
     }
 
-    // function changeCurrentPageDisplayer(page: string) {
-    //     setDropDown("none");
-    //     setCurrent(page);
-    // }
-
     return (
         <BrowserRouter>
             <div className="header" style={{ display: 
-                window.location.pathname == "/admin" ? "none" : "flex" }}>
+                window.location.pathname == "/admin" || 
+                window.location.pathname == "/admin/dashboard" || 
+                window.location.pathname == "/admin/client" || 
+                window.location.pathname == "/admin/chambre"
+                ? "none" : "flex" }}>
                 <div className="logo-field">
                     <img src={logo} alt="logo" className="logo" />
                     <span>HOTEL</span>
@@ -113,9 +115,6 @@ export default function App() {
                     </div>
                 </div>
             </div>
-            {/* <div className="history" style={ { display: displayUserStatus } }>
-                <i className="fa-solid fa-history"></i>
-            </div> */}
             <div className="deconnecter-field" style={ { display: showDeconnecterModal } }>
                 <Deconnecter setShowDeconnecterModal={ setShowDeconnecterModal } setDisplayUserStatus={ setDisplayUserStatus } />
             </div>
@@ -126,13 +125,13 @@ export default function App() {
                     <Route path="/contact" element={ <Contact /> } />
                     <Route path="/auth" element={ <Auth setCurrent={ setCurrent } setDisplayUserStatus={ setDisplayUserStatus } /> } />
 
-                    <Route path="/admin" element={ <Admin /> } />
+                    <Route path="/admin" element={ <Admin /> }>
+                        <Route index element={ <Dashboard /> } />
+                        <Route path="/admin/chambre" element={ <Chambre /> } />
+                        <Route path="/admin/client" element={ <ClientComp />} />
+                    </Route>
                 </Routes>
             </div>
-            {/* <div className="footer">
-                <div className="white-space"></div>
-                <div className="main-footer"></div>
-            </div> */}
         </BrowserRouter>
     );
 }
