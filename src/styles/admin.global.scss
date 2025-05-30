@@ -1,8 +1,9 @@
 @use "ths.scss";
 
 $col1: #ffffff;
-$col2: #ffffff;
-$col3: #ffaaff;
+$col2: #0a435a;
+$col3: #08ac08;
+$col4: #e0e0e0;
 $transition: all 0.3s;
 $border: 8px;
 $px: 8px;
@@ -26,20 +27,64 @@ $px: 8px;
     @include ths.flex();
     .menu-container {
         width: 20%;
+        position: fixed;
+        left: 0;
     }
     .content-container {
         width: 80%;
-        height: 100vh;
+        margin-left: 20%;
     }
 }
 .menu {
-    background-image: linear-gradient(to bottom right, rgb(32, 29, 66), rgb(10, 67, 90));
+    @include ths.flex(column, left, left);
+    background-image: linear-gradient(to bottom right, #201d42, $col2);
     height: 100vh;
-    li {
-        list-style: none;
-        .link {
-            color: $col1;
-            text-decoration: none;
+    padding: $px * 2;
+    .user-icon {
+        text-align: center;
+        color: $col1;
+        font-size: 50px;
+        .fa-user {
+            border: 1px solid rgba($color: $col1, $alpha: 0.5);
+            padding: (calc(((4 * $px) + (3 * $px)) / 4)) ($px * 2);
+            margin: ($px * 2) auto;
+            border-radius: 100%;
+        }
+    }
+    .link {
+        color: $col1;
+        text-decoration: none;
+        padding: $px * 2;
+        transition: $transition;
+    }
+    .link:hover {
+        background-color: $col2;
+    }
+}
+.dashboard, .chambre, .client {
+    background-color: $col4;
+    height: 100vh;
+    padding: $px * 4;
+}
+.dashboard {
+    .reservation-container {
+        @include ths.flex(column, center, center);
+        .box {
+            @include ths.flex();
+            gap: 1rem;
+            .box-item {
+                @include ths.flex(column, left, space-around);
+                padding: $px * 2;
+                background-color: $col1;
+                width: 250px;
+                height: 150px;
+                border-radius: $border * 4;
+                color: $col2;
+                h1 {
+                    text-align: right;
+                    color: $col3;
+                }
+            }
         }
     }
 }

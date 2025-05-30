@@ -4,9 +4,10 @@ import "../../styles/admin.global.scss";
 function Menu() {
     return (
         <div className="menu">
-            <li><Link to={"/admin"} className="link"><i className="fa-solid fa-line-chart"></i> Dashboard</Link></li>
-            <li><Link to={"/admin/client"} className="link"><i className="fa-solid fa-user"></i> Client</Link></li>
-            <li><Link to={"/admin/chambre"} className="link"><i className="fa-solid fa-room"></i> Chambre</Link></li>
+            <div className="user-icon"><i className="fa-solid fa-user"></i></div>
+            <Link to={"/admin"} className="link"><i className="fa-solid fa-line-chart"></i> Tableau de bord</Link>
+            <Link to={"/admin/client"} className="link"><i className="fa-solid fa-user"></i> Client</Link>
+            <Link to={"/admin/chambre"} className="link"><i className="fa-solid fa-hotel"></i> Chambre</Link>
         </div>
     );
 }
