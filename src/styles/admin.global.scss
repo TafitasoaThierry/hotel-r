@@ -20,11 +20,11 @@ $px: 8px;
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-    font-family: Roboto;
 }
 
 .admin {
     @include ths.flex();
+    font-family: Roboto;
     .menu-container {
         width: 20%;
         position: fixed;
@@ -37,8 +37,8 @@ $px: 8px;
 }
 .menu {
     @include ths.flex(column, left, left);
-    background-image: linear-gradient(to bottom right, #201d42, $col2);
-    height: 100vh;
+    // background-image: linear-gradient(to bottom right, #201d42, $col2);
+    // height: 100vh;
     padding: $px * 2;
     .user-icon {
         text-align: center;
@@ -52,7 +52,7 @@ $px: 8px;
         }
     }
     .link {
-        color: $col1;
+        color: $col3;
         text-decoration: none;
         padding: $px * 2;
         transition: $transition;
@@ -62,7 +62,7 @@ $px: 8px;
     }
 }
 .dashboard, .chambre, .client {
-    background-color: $col4;
+    // background-color: $col4;
     height: 100vh;
     padding: $px * 4;
 }
@@ -75,7 +75,7 @@ $px: 8px;
             .box-item {
                 @include ths.flex(column, left, space-around);
                 padding: $px * 2;
-                background-color: $col1;
+                // background-color: $col1;
                 width: 250px;
                 height: 150px;
                 border-radius: $border * 4;
