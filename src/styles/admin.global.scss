@@ -25,66 +25,35 @@ $px: 8px;
 .admin {
     @include ths.flex();
     font-family: Roboto;
+    
+    .menu-container, .content-container {
+        height: 100vh;
+        padding: $px * 2;
+    }
     .menu-container {
         width: 20%;
         position: fixed;
         left: 0;
+        background-color: $col2;
     }
     .content-container {
         width: 80%;
         margin-left: 20%;
+        background-color: #f0f0f0;
     }
 }
-.menu {
+
+.dashboard-menu {
     @include ths.flex(column, left, left);
-    // background-image: linear-gradient(to bottom right, #201d42, $col2);
-    // height: 100vh;
-    padding: $px * 2;
-    .user-icon {
-        text-align: center;
+
+    .user-icon, .link {
         color: $col1;
-        font-size: 50px;
-        .fa-user {
-            border: 1px solid rgba($color: $col1, $alpha: 0.5);
-            padding: (calc(((4 * $px) + (3 * $px)) / 4)) ($px * 2);
-            margin: ($px * 2) auto;
-            border-radius: 100%;
-        }
+        padding: $px;
+    }
+    .user-icon {
+        @include ths.flex();
     }
     .link {
-        color: $col3;
         text-decoration: none;
-        padding: $px * 2;
-        transition: $transition;
-    }
-    .link:hover {
-        background-color: $col2;
-    }
-}
-.dashboard, .chambre, .client {
-    // background-color: $col4;
-    height: 100vh;
-    padding: $px * 4;
-}
-.dashboard {
-    .reservation-container {
-        @include ths.flex(column, center, center);
-        .box {
-            @include ths.flex();
-            gap: 1rem;
-            .box-item {
-                @include ths.flex(column, left, space-around);
-                padding: $px * 2;
-                // background-color: $col1;
-                width: 250px;
-                height: 150px;
-                border-radius: $border * 4;
-                color: $col2;
-                h1 {
-                    text-align: right;
-                    color: $col3;
-                }
-            }
-        }
     }
 }

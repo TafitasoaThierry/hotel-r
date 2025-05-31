@@ -3,7 +3,7 @@ import "../../styles/admin.global.scss";
 
 function Menu() {
     return (
-        <div className="menu">
+        <div className="dashboard-menu">
             <div className="user-icon"><i className="fa-solid fa-user"></i></div>
             <Link to={"/admin"} className="link"><i className="fa-solid fa-line-chart"></i> Tableau de bord</Link>
             <Link to={"/admin/client"} className="link"><i className="fa-solid fa-user"></i> Client</Link>

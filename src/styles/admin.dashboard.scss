@@ -1,0 +1,61 @@
+@use "ths.scss";
+
+$col1: #ffffff;
+$col2: #0a435a;
+$col3: #08ac08;
+$col4: #e0e0e0;
+$transition: all 0.3s;
+$border: 8px;
+$px: 8px;
+
+.dashboard-container {
+    @include ths.flex(column, left, left);
+    padding: $px * 2;
+
+    .reservation-container {
+        .box {
+            @include ths.flex(row, center, center);
+            gap: 1rem;
+
+            .box-item {
+                padding: $px * 2;
+                background-color: $col1;
+                color: $col2;
+                border-radius: $border * 2;
+                
+                .value {
+                    @include ths.flex(row, center, right);
+                    color: $col3;
+                }
+            }
+        }
+        .search-field {
+            @include ths.flex(row, center, left);
+            .form-control {
+                border-radius: 0px;
+                width: 300px;
+                margin-right: $px;
+            }
+            .btn {
+                border-radius: 0px;
+                background-color: $col3;
+                color: $col1;
+            }
+        }
+        .reservation-list {
+            @include ths.flex(column, left, left);
+            gap: 1rem;
+            width: 100%;
+            border: 1px solid black;
+            height: 400px;
+            overflow-y: scroll;
+            padding: $px * 2;
+            margin: $px auto;
+            
+            .list {
+                border: 1px solid black;
+                padding: $px * 2;
+            }
+        }
+    }
+}
