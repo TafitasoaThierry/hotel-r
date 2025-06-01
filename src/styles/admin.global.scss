@@ -1,7 +1,7 @@
 @use "ths.scss";
 
 $col1: #ffffff;
-$col2: #0a435a;
+$col2: #0e85b4;
 $col3: #08ac08;
 $col4: #e0e0e0;
 $transition: all 0.3s;
@@ -38,7 +38,6 @@ $px: 8px;
     .content-container {
         width: 80%;
         margin-left: 20%;
-        background-color: #dddddd;
         padding: $px * 2;
     }
 }

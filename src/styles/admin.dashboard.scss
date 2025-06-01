@@ -14,36 +14,48 @@ $px: 8px;
 
     .reservation-container {
         width: 100%;
-        padding: $px;
+        padding: $px * 2;
 
         .data {
-            @include ths.flex();
+            @include ths.flex(row, left, left);
             gap: 1rem;
             .box-list {
                 @include ths.flex(row, left, left);
                 gap: 1rem;
                 flex-wrap: wrap;
+                margin-top: calc($px / 2);
                 width: 50%;
                 .box {
-                    color: $col2;
                     padding: $px * 2;
-                    width: 200px;
+                    width: 100%;
                     height: 154px;
-                    background-color: $col1;
-                }
-                .ce-mois {
-                    width: 400px + $px * 2;
-                    // background-color: rgba($color: $col3, $alpha: 0.2);
+                    background-image: linear-gradient(to bottom right, $col2, rgba($color: $col3, $alpha: 0.1));
+                    color: $col1;
+                    border-radius: $border * 2;
+                    z-index: 5;
                 }
             }
             .histogramme {
-                background-color: $col1;
-                width: 500px;
-                color: $col2;
+                border-radius: $border * 2;
+                background-image: linear-gradient(to bottom right, rgba($color: $col2, $alpha: 0.3), $col1);
+                box-shadow: 1px 1px 100px 0px rgba($color: #000000, $alpha: 0.5);
+                z-index: 1;
                 h2 {
+                    color: $col2;
                     text-align: center;
+                    padding: $px;
+                }
+                .bar-chart {
+                    width: 500px;
+                    height: 240px;
+                    color: #08ac08;
                 }
             }
+        }
+        h2 {
+            margin-top: $px * 5;
+            color: #0e85b4;
+            z-index: 100;
         }
         .search-field {
             @include ths.flex(row, left, left);
@@ -51,11 +63,12 @@ $px: 8px;
 
             .form-control {
                 width: 400px;
-                border: none;
+                border: 1px solid $col2;
                 border-radius: 0px;
+                color: $col2;
             }
             .btn {
-                background-color: $col3;
+                background-color: $col2;
                 color: $col1;
                 border-radius: 0px;
                 margin-left: $px;
@@ -63,7 +76,6 @@ $px: 8px;
         }
         .filter {
             .label {
-                background-color: #e0e0e0;
                 border-radius: 0px;
                 border: none;
                 margin: $px auto auto auto;
@@ -83,9 +95,11 @@ $px: 8px;
             padding: $px * 2;
             margin: $px auto;
             background-color: $col1;
+            border: 1px solid $col2;
 
             .list {
-                border: 1px solid $col2;
+                border: 1px solid rgba($color: $col2, $alpha: 0.5);
+                border-radius: $px;
                 padding: $px * 2;
             }
         }
