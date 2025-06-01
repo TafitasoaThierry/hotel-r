@@ -63,6 +63,12 @@ function Reservation() {
                 <input type="text" className="form-control" placeholder="Rechercher de réservation(nom, prenoms)" />
                 <button className="btn"><i className="fa-solid fa-search"></i> Rechercher</button>
             </div>
+            <div className="filter">
+                <button className="btn label">Filtre: </button>
+                <button className="btn btn-filter">Tout</button>
+                <button className="btn btn-filter">Payé</button>
+                <button className="btn btn-filter">Non Payé</button>
+            </div>
             <div className="reservation-list">
                 <div className="list">Réservation de 1 chambre classique pour 2 personnes</div>
                 <div className="list">Réservation de 1 chambre classique pour 2 personnes</div>

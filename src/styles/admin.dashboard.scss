@@ -13,7 +13,6 @@ $px: 8px;
     gap: 1rem;
 
     .reservation-container {
-        border: 1px solid black;
         width: 100%;
         padding: $px;
 
@@ -21,30 +20,26 @@ $px: 8px;
             @include ths.flex();
             gap: 1rem;
             .box-list {
-                @include ths.flex(row, center, center);
+                @include ths.flex(row, left, left);
                 gap: 1rem;
                 flex-wrap: wrap;
                 width: 50%;
                 .box {
                     color: $col2;
-                    border-radius: $border * 2;
                     padding: $px * 2;
                     width: 200px;
-                    height: 158px;
+                    height: 154px;
                     background-color: $col1;
-                    // box-shadow: 1px 1px 2px rgba($color: $col2, $alpha: 0.5);
                 }
                 .ce-mois {
                     width: 400px + $px * 2;
-                    background-color: rgba($color: $col3, $alpha: 0.2);
+                    // background-color: rgba($color: $col3, $alpha: 0.2);
                 }
             }
             .histogramme {
                 background-color: $col1;
                 width: 500px;
                 color: $col2;
-                box-shadow: 1px 1px 2px rgba($color: $col2, $alpha: 0.5);
-                border-radius: $border * 2;
                 h2 {
                     text-align: center;
                 }
@@ -52,9 +47,11 @@ $px: 8px;
         }
         .search-field {
             @include ths.flex(row, left, left);
+            margin: $px auto auto auto;
 
             .form-control {
                 width: 400px;
+                border: none;
                 border-radius: 0px;
             }
             .btn {
@@ -64,12 +61,25 @@ $px: 8px;
                 margin-left: $px;
             }
         }
+        .filter {
+            .label {
+                background-color: #e0e0e0;
+                border-radius: 0px;
+                border: none;
+                margin: $px auto auto auto;
+            }
+            .btn-filter {
+                border-radius: 0px;
+                margin: $px $px auto auto;
+                background-color: $col1;
+                border: 1px solid $col2;
+            }
+        }
         .reservation-list {
             @include ths.flex(column, left, left);
             gap: 1rem;
             height: 380px;
             overflow-y: scroll;
-            border: 1px solid black;
             padding: $px * 2;
             margin: $px auto;
             background-color: $col1;
