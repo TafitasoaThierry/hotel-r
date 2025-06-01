@@ -133,7 +133,7 @@ function List(props: any) {
     }
     return (
         <div className="list">
-            <p>{props.reservation.ref}, cli_ID = {props.reservation.numeroClient}, nom: {client.nom}, prenoms: {client.prenoms} {getClient(props.reservation.numeroClient)}</p>
+            <p onChange={() => getClient(props.reservation.numeroClient)}>{props.reservation.ref}, cli_ID = {props.reservation.numeroClient}, nom: {client.nom}, prenoms: {client.prenoms}</p>
             <button className="btn btn-primary" onClick={() => getID(props.reservation.ref)}>GET_ID</button>
         </div>
     );
