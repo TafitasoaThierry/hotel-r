@@ -26,20 +26,20 @@ $px: 8px;
     @include ths.flex();
     font-family: Roboto;
     
-    .menu-container, .content-container {
+    .menu-container {
         height: 100vh;
         padding: $px * 2;
-    }
-    .menu-container {
         width: 20%;
         position: fixed;
+        top: 0;
         left: 0;
         background-color: $col2;
     }
     .content-container {
         width: 80%;
         margin-left: 20%;
-        background-color: #f0f0f0;
+        background-color: #dddddd;
+        padding: $px * 2;
     }
 }
 
