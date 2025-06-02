@@ -3,7 +3,7 @@ import host from './host.ts';
 import Person from './person.ts';
 
 const post: string = "/addClient";
-const get: string = "/getClientList"; // liste globale
+const get: string = "/getClientList"; // select *
 const getClientById = "/getClientByNumeroClient"; // By ID
 const getClientByTel = "/getClientByTel"; // obtenir * client par le numero tel => (tout client avec le tel en parametre)
 const getClientByEmail = "/getClientByEmail"; // obtenir * client par email => (tout client avec l'email en parametre)

@@ -3,7 +3,7 @@ import host from './host.ts';
 
 const post: string = "/addReservation";
 const get: string = "/getReservationList";
-//const getChambreById: string = "/getChanbreById";
+const getChambreById: string = "/getChanbreById";
 const update: string = "/updateReservation";
 const remove: string = "/deleteReservation";
 
@@ -14,6 +14,11 @@ class Chambre {
 
     public obtenirListeReservation() {
         const fetch = axios.get(host + get);
+        return fetch;
+    }
+
+    public obtenirChambreByNumero() {
+        const fetch = axios.get(host + getChambreById);
         return fetch;
     }
 
