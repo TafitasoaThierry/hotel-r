@@ -1,39 +1,39 @@
 import axios from "axios";
 import host from './host.ts';
 
-const post: string = "/addReservation";
-const get: string = "/getReservationList";
-const getChambreById: string = "/getChanbreById";
-const update: string = "/updateReservation";
-const remove: string = "/deleteReservation";
+const post: string = "/addChambre";
+const get: string = "/getChambreList";
+const getChambreById: string = "/getChambreById";
+const update: string = "/updateChambre";
+const remove: string = "/deleteChambre";
 
 class Chambre {
     // private numero: string = ""; // ID
     // private type: string = "";
     // private status: string = "";
 
-    public obtenirListeReservation() {
+    public obtenirListeChambre() {
         const fetch = axios.get(host + get);
         return fetch;
     }
 
-    public obtenirChambreByNumero() {
-        const fetch = axios.get(host + getChambreById);
+    public obtenirChambreByNumero(numero: string) {
+        const fetch = axios.get(host + getChambreById + "/" + numero);
         return fetch;
     }
 
-    public faireReservation() { // => ajouter Reservation
-        const fetch = axios.post(host + post);
+    public ajouterChambre(newChambre: any) { // => ajouter Reservation
+        const fetch = axios.post(host + post, newChambre);
         return fetch;
     }
 
-    public modifierReservation(reference: number) {
-        const fetch = axios.put(host + reference + update);
+    public modifierChambre(numero: number, chambreNewInfo: any) {
+        const fetch = axios.put(host + update + "/" + numero, chambreNewInfo);
         return fetch;
     }
 
-    public annulerReservation(reference: number) { // => supprimer reservation
-        const fetch = axios.delete(remove + reference + remove);
+    public supprimerChambre(numero: number) { // => supprimer reservation
+        const fetch = axios.delete(host + remove + "/" + numero);
         return fetch;
     }
 }

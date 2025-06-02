@@ -15,8 +15,8 @@ class Reservation {
     // private status: string;
     // private nbPersonne: number;
     // private nbChambre: number;
-    // private numeroClient: number; // FK
-    // private matricule: string; // FK
+    // private numeroClient: number;
+    // private matricule: string;
 
     public obtenirListeReservation() {
         const fetch = axios.get(host + get);
@@ -28,13 +28,13 @@ class Reservation {
         return fetch;
     }
 
-    public modifierReservation(reference: number) {
-        const fetch = axios.put(host + reference + update);
+    public modifierReservation(reference: number, reservation: any) {
+        const fetch = axios.put(host + update + "/" + reference, reservation);
         return fetch;
     }
 
     public annulerReservation(reference: number) { // => supprimer reservation
-        const fetch = axios.delete(remove + reference + remove);
+        const fetch = axios.delete(host + remove + "/" + reference);
         return fetch;
     }
 }

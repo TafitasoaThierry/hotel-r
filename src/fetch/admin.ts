@@ -16,23 +16,23 @@ class Admin extends Person {
         return fetch;
     }
 
-    public obtenirAdminByMatricule() {
-        const fetch = axios.get(host + getById);
+    public obtenirAdminByMatricule(matricule: string) {
+        const fetch = axios.get(host + getById + "/" + matricule);
         return fetch;
     }
 
-    public creerCompte() { // => ajouter Admin
-        const fetch = axios.post(host + post);
+    public creerCompte(newAdmin: any) { // => ajouter Admin
+        const fetch = axios.post(host + post, newAdmin);
         return fetch;
     }
 
-    public modifierAdmin(matricule: string) {
-        const fetch = axios.put(host + matricule + update);
+    public modifierAdmin(matricule: string, adminNewInfo: any) {
+        const fetch = axios.put(host + update + "/" + matricule, adminNewInfo);
         return fetch;
     }
 
     public supprimerAdmin(matricule: string) {
-        const fetch = axios.delete(remove + matricule + remove);
+        const fetch = axios.delete(host + remove + "/" + matricule);
         return fetch;
     }
 }

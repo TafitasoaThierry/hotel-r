@@ -18,7 +18,7 @@ class Client extends Person {
         return fetch;
     }
 
-    public obtenirClientByNumeroClient(numeroClient: any) {
+    public obtenirClientByNumeroClient(numeroClient: number) {
         const fetch = axios.get(host + getClientById + "/" + numeroClient);
         return fetch;
     }
@@ -38,13 +38,13 @@ class Client extends Person {
         return fetch;
     }
 
-    public modifierCompte(numeroClient: number) { // => supprimer client
-        const fetch = axios.put(host + numeroClient + update);
+    public modifierCompte(numeroClient: number, client: any) {
+        const fetch = axios.put(host + update + "/" + numeroClient, client);
         return fetch;
     }
 
     public supprimerClient(numeroClient: number) {
-        const fetch = axios.delete(remove + numeroClient + remove);
+        const fetch = axios.delete(host + remove + "/" + numeroClient);
         return fetch;
     }
 }
