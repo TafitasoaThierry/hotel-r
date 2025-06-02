@@ -22,7 +22,7 @@ class Chambre {
         return fetch;
     }
 
-    public ajouterChambre(newChambre: any) { // => ajouter Reservation
+    public ajouterChambre(newChambre: any) { // => ajouter chambre
         const fetch = axios.post(host + post, newChambre);
         return fetch;
     }
@@ -32,7 +32,7 @@ class Chambre {
         return fetch;
     }
 
-    public supprimerChambre(numero: number) { // => supprimer reservation
+    public supprimerChambre(numero: number) { // => supprimer chambre
         const fetch = axios.delete(host + remove + "/" + numero);
         return fetch;
     }
