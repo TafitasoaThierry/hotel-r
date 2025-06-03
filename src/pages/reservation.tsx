@@ -102,14 +102,13 @@ export default function Reservation() {
                     <label>2 Lits</label>
                     <img src={ twin } alt="deluxe" />
                 </div>
-                {/* onClick={ () => setShowInfo("block-inline") } */}
                 <button className="question"><i className="fa-solid fa-question"></i> En savoir plus</button>
             </div>
 
             <div className="container">
                 <h5>Formulaire de réservation</h5>
-                <p className="errorMsg" style={{ display: errorMsg() }}><i className="fa-solid fa-info"></i> Date de réservation invalide</p>
-                <p className="infoMsg" style={{ display: reservation.type == "" ? "inline" : "none" }}><i className="fa-solid fa-info"></i> Choisir la type de chambre</p>
+                <p className="errorMsg" style={{ display: errorMsg() }}>Date de réservation invalide</p>
+                <p className="infoMsg" style={{ display: reservation.type == "" ? "inline" : "none" }}>Choisir la type de chambre</p>
                 <div className="form">
                     <div className="form-group">
                         <label>Nombre de personne</label>

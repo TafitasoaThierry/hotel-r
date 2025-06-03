@@ -37,7 +37,6 @@ function Histogramme() {
 function Reservation() {
     const [recent, setRecent] = useState(0);
     const [total, setTotal] = useState(0);
-    const [ceMois, setCeMois] = useState(0);
     const [reservationList, setReservationList] = useState([]);
 
     useEffect(() => {
@@ -59,12 +58,10 @@ function Reservation() {
 
     function effectif(obj: any) {
         const date = new Date();
-        const now = setDateFormat(date.getDate().toString(), date.getMonth().toString(), date.getFullYear().toString());
-        // let countTodayReservation:any = obj.filter(item => item.dateReservation == now)
-        // console.log(now);
+        let now = setDateFormat(date.getDate().toString(), date.getMonth().toString(), date.getFullYear().toString());
+        let todayReservation:any = obj.filter((item:any) => item.dateReservation == now)
         setTotal(obj.length);
-        setRecent(0);
-        setCeMois(0);
+        setRecent(todayReservation.length);
     }
     function setDateFormat(day:string, month:string, year:string) {
         day = day.length < 2 ? "0" + day : day;
@@ -85,10 +82,6 @@ function Reservation() {
                         <h5>Totale réservation</h5>
                         <h3>{ total }</h3>
                     </div>
-                    {/* <div className="box ce-mois">
-                        <h5>Recette de ce mois</h5>
-                        <h3>{ ceMois }</h3>
-                    </div> */}
                 </div>
             </div>
             <h2>Listes de réservation</h2>
@@ -148,17 +141,19 @@ function List({reservation}: any) {
         .then((response) => {
             console.log(response.data);
         })
-        .catch(() => console.log("ERR"));
+        .catch(() => console.log("ERRRR"));
     }
 
     return (
         <div className="list">
-            <p>Réservation de <span className="chambre">{reservation.nbChambre} chambre {reservation.type}</span> pour <span className="personne">{reservation.nbPersonne} personne</span> au nom de {client.nom} {client.prenoms}</p>
+            <p>Réservation de<span className="chambre">{reservation.nbChambre} chambre {reservation.type}</span>pour<span className="personne">{reservation.nbPersonne} personne</span>au nom de {client.nom} {client.prenoms}</p>
             <p>Du {reservation.dateDebut} au {reservation.dateFin}</p>
             <p><a href="https://mail.google.com">{client.email}</a></p>
             <div className="control">
-                <button className="btn btn-primary">Test GET_ID</button>
+                <button className="btn btn-primary"><i className="fa-solid fa-calendar"></i> Réservé le {reservation.dateReservation}</button>
+                <button className="btn btn-primary">{reservation.status}</button>
                 <button className="btn btn-primary"><i className="fa-solid fa-check"></i> Valider</button>
+                <button className="btn btn-primary"><i className="fa-solid fa-edit"></i></button>
                 <button className="btn btn-primary" onClick={ () => {setShowDeleteModal(true); setRef(reservation.ref)}}><i className="fa-solid fa-trash"></i></button>
             </div>
             <ConfirmDelete
@@ -172,7 +167,7 @@ function List({reservation}: any) {
 }
 
 function ConfirmDelete({nom, showDeleteModal, setShowDeleteModal, setConfirmRemove} : any) {
-    function remove() {
+    const remove = () => {
         setConfirmRemove(true);
         setShowDeleteModal(false);
     }
