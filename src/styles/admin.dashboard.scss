@@ -19,12 +19,14 @@ $px: 8px;
         .data {
             @include ths.flex(row, left, left);
             gap: 1rem;
+
             .box-list {
                 @include ths.flex(row, left, left);
                 gap: 1rem;
                 flex-wrap: wrap;
                 margin-top: calc($px / 2);
                 width: 50%;
+
                 .box {
                     padding: $px * 2;
                     width: 100%;
@@ -40,6 +42,7 @@ $px: 8px;
                 background-image: linear-gradient(to bottom right, rgba($color: $col2, $alpha: 0.3), $col1);
                 box-shadow: 1px 1px 100px 0px rgba($color: #000000, $alpha: 0.5);
                 z-index: 1;
+
                 h2 {
                     color: $col2;
                     text-align: center;
@@ -99,8 +102,83 @@ $px: 8px;
 
             .list {
                 border: 1px solid rgba($color: $col2, $alpha: 0.5);
-                border-radius: $px;
                 padding: $px * 2;
+
+                .chambre {
+                    background-color: rgba($color: $col3, $alpha: 0.2);
+                    padding: $px;
+                    border-radius: $border;
+                }
+                .personne {
+                    background-color: rgba($color: $col3, $alpha: 0.2);
+                    padding: $px;
+                    border-radius: $border;
+                }
+                .control {
+                    @include ths.flex(row, left, left);
+                    gap: 1rem;
+
+                    .btn {
+                        border-radius: 0px;
+                    }
+                }
+            }
+        }
+        .confirm-delete {
+            @include ths.flex();
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            width: 100vw;
+            height: 100vh;
+            backdrop-filter: blur(8px);
+            animation: modal 0.3s;
+
+            .delete-modal {
+                @include ths.flex(column, center, center);
+                border-radius: $border * 2;
+                padding: ($px) ($px * 2) ($px * 3) ($px * 2);
+                background-color: $col1;
+                box-shadow: 1px 1px 20px 1px rgba($color: #000000, $alpha: 0.3);
+
+                .delete-modal-icon {
+                    font-size: $px * 3;
+                    padding: $px * 2;
+                    margin: $px;
+                    color: red;
+                }
+                .control-btn {
+                    @include ths.flex();
+                    gap: 1rem;
+
+                    .btn {
+                        padding: auto $px;
+                        border-radius: 0px;
+                        border: 1px solid rgba($color: red, $alpha: 0.3);
+                        border-radius: $px * 4;
+                        transition: $transition;
+                        width: 120px;
+                    }
+                    .cancel-btn {
+                        color: red;
+                    }
+                    .delete-btn {
+                        background-color: red;
+                        color: $col1;
+                    }
+                    .btn:hover {
+                        transform: scale(0.98);
+                    }
+                }
+            }
+        }
+        @keyframes modal {
+            from {
+                opacity: 0;
+            }to {
+                opacity: 1;
             }
         }
     }

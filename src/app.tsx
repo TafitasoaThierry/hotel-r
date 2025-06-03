@@ -154,8 +154,8 @@ function Deconnecter({ setShowDeconnecterModal, setDisplayUserStatus }: any) {
                     <p>Est-ce que vous voulez déconnecter?</p>
                 </div>
                 <div className="footer">
-                    <button className="btn annuler" onClick={ () => setShowDeconnecterModal("none") }><i className="fa-solid fa-cancel"></i></button>
-                    <button className="btn confirmer" onClick={ confirmer }><i className="fa-solid fa-sign-out"></i></button>
+                    <button className="btn annuler" onClick={ () => setShowDeconnecterModal("none") }><i className="fa-solid fa-cancel"></i> Annuler</button>
+                    <button className="btn confirmer" onClick={ confirmer }><i className="fa-solid fa-sign-out"></i> Déconnecter</button>
                 </div>
             </div>
         </div>

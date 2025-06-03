@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "../../styles/admin.dashboard.scss";
-import ReservationObj from "../../fetch/reservation";
 import { BarChart } from "@mui/x-charts";
-import Client from "../../fetch/client";
+import ClientObj from "../../fetch/client";
+import ReservationObj from "../../fetch/reservation";
 
 export default function Dashboard() {
     return (
@@ -12,38 +12,56 @@ export default function Dashboard() {
     );
 }
 
+function Histogramme() {
+    return (
+        <div className="histogramme">
+            <h2>Recette mensuelle</h2>
+            <BarChart
+                xAxis={[
+                    {
+                        id: 'barCategories',
+                        data: ['Jan', 'Fev', 'Mars', 'Avr', 'Mai', 'Jui','Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    },
+                ]}
+                series={[
+                    {
+                        data: [2, 5, 3, 2, 5, 3, 2, 5, 3, 23, 12, 31],
+                    },
+                ]}
+                className="bar-chart"
+            />
+        </div>
+    );
+}
+
 function Reservation() {
     const [recent, setRecent] = useState(0);
     const [total, setTotal] = useState(0);
     const [ceMois, setCeMois] = useState(0);
     const [reservationList, setReservationList] = useState([]);
-    const Person = [
-        { "id": "001", "name": "aaa", "age": 19 },
-        { "id": "002", "name": "bbb", "age": 18 },
-        { "id": "003", "name": "ccc", "age": 30 },
-        { "id": "004", "name": "ddd", "age": 21 }
-    ]
 
     useEffect(() => {
         const reservation = new ReservationObj();
-        reservation.obtenirListeReservation()
-        .then((response) => {
-            effectif(response.data);
-            setReservationList(response.data);
-        })
-        .catch((e) => console.log(e))
+        setInterval(() => {
+            reservation.obtenirListeReservation()
+            .then((response) => {
+                effectif(response.data);
+                setReservationList(response.data);
+            })
+            .catch((e) => console.log(e))
+        }, 1000)
     }, [])
 
     useEffect(() => {
         setReservationList(reservationList);
-        console.log(reservationList);
+        // console.log(reservationList);
     }, [reservationList])
 
     function effectif(obj: any) {
         const date = new Date();
         const now = setDateFormat(date.getDate().toString(), date.getMonth().toString(), date.getFullYear().toString());
-        //let countTodayReservation:any = obj.filter(item => item.dateReservation == now)
-        console.log(now);
+        // let countTodayReservation:any = obj.filter(item => item.dateReservation == now)
+        // console.log(now);
         setTotal(obj.length);
         setRecent(0);
         setCeMois(0);
@@ -91,50 +109,85 @@ function Reservation() {
     );
 }
 
-function Histogramme() {
+function List({reservation}: any) {
+    const [client, setClient] = useState({
+        nom: "",
+        prenoms: "",
+        email: ""
+    });
+    const [confirmRemove, setConfirmRemove] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [ref, setRef] = useState(0);
+
+    useEffect(() => {
+        getClient(reservation.numeroClient);
+    }, [])
+
+    useEffect(() => {
+        if(confirmRemove == true) {
+            annulerReservation(ref);
+        }
+    }, [showDeleteModal])
+
+    function getClient(numeroClient: any) {
+        const client = new ClientObj();
+        client.obtenirClientByNumeroClient(numeroClient)
+        .then((r) => { 
+            setClient({
+                nom: r.data.nom,
+                prenoms: r.data.prenoms,
+                email: r.data.email
+            })
+            setConfirmRemove(false);
+        })
+    }
+
+    function annulerReservation(ref: number) {
+        const reservation = new ReservationObj();
+        reservation.annulerReservation(ref)
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch(() => console.log("ERR"));
+    }
+
     return (
-        <div className="histogramme">
-            <h2>Recette mensuelle</h2>
-            <BarChart
-                xAxis={[
-                    {
-                        id: 'barCategories',
-                        data: ['Jan', 'Fev', 'Mars', 'Avr', 'Mai', 'Jui','Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    },
-                ]}
-                series={[
-                    {
-                        data: [2, 5, 3, 2, 5, 3, 2, 5, 3, 23, 12, 31],
-                    },
-                ]}
-                className="bar-chart"
+        <div className="list">
+            <p>Réservation de <span className="chambre">{reservation.nbChambre} chambre {reservation.type}</span> pour <span className="personne">{reservation.nbPersonne} personne</span> au nom de {client.nom} {client.prenoms}</p>
+            <p>Du {reservation.dateDebut} au {reservation.dateFin}</p>
+            <p><a href="https://mail.google.com">{client.email}</a></p>
+            <div className="control">
+                <button className="btn btn-primary">Test GET_ID</button>
+                <button className="btn btn-primary"><i className="fa-solid fa-check"></i> Valider</button>
+                <button className="btn btn-primary" onClick={ () => {setShowDeleteModal(true); setRef(reservation.ref)}}><i className="fa-solid fa-trash"></i></button>
+            </div>
+            <ConfirmDelete
+                nom={client.nom + " " + client.prenoms}
+                showDeleteModal={showDeleteModal}
+                setShowDeleteModal={setShowDeleteModal}
+                setConfirmRemove={setConfirmRemove}
             />
         </div>
     );
 }
 
-function List(props: any) {
-    const [client, setClient] = useState({
-        nom: "",
-        prenoms: ""
-    });
-    function getID(ref: any) {
-        alert("ID = " + ref);
-    }
-    function getClient(numeroClient: any) {
-        const client = new Client();
-        client.obtenirClientByNumeroClient(numeroClient)
-        .then((r) => {
-            setClient({
-                nom: r.data.nom,
-                prenoms: r.data.prenoms
-            })
-        })
+function ConfirmDelete({nom, showDeleteModal, setShowDeleteModal, setConfirmRemove} : any) {
+    function remove() {
+        setConfirmRemove(true);
+        setShowDeleteModal(false);
     }
     return (
-        <div className="list">
-            <p onChange={() => getClient(props.reservation.numeroClient)}>{props.reservation.ref}, cli_ID = {props.reservation.numeroClient}, nom: {client.nom}, prenoms: {client.prenoms}</p>
-            <button className="btn btn-primary" onClick={() => getID(props.reservation.ref)}>GET_ID</button>
+        <div className="confirm-delete" style={{ display: showDeleteModal == true ? "flex" : "none" }}>
+            <div className="delete-modal">
+                <i className="fa-solid fa-trash delete-modal-icon"></i>
+                <h4>Supprimer une réservation</h4>
+                <p>La suppression est irréversible</p>
+                <p>Réservation de {nom}</p>
+                <div className="control-btn">
+                    <button className="btn cancel-btn" onClick={() => setShowDeleteModal(false)}><i className="fa-solid fa-cancel"></i> Annuler</button>
+                    <button className="btn delete-btn" onClick={remove}><i className="fa-solid fa-trash"></i> Supprimer</button>
+                </div>
+            </div>
         </div>
     );
 }
