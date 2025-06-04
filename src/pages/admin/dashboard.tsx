@@ -152,9 +152,11 @@ function List({reservation}: any) {
             <div className="control">
                 <button className="btn btn-primary"><i className="fa-solid fa-calendar"></i> Réservé le {reservation.dateReservation}</button>
                 <button className="btn btn-primary">{reservation.status}</button>
-                <button className="btn btn-primary"><i className="fa-solid fa-check"></i> Valider</button>
-                <button className="btn btn-primary"><i className="fa-solid fa-edit"></i></button>
-                <button className="btn btn-primary" onClick={ () => {setShowDeleteModal(true); setRef(reservation.ref)}}><i className="fa-solid fa-trash"></i></button>
+                <div className="control-btn">
+                    <button className="btn crud-btn valider"><i className="fa-solid fa-check"></i> Valider</button>
+                    <button className="btn crud-btn update"><i className="fa-solid fa-edit"></i></button>
+                    <button className="btn crud-btn delete" onClick={ () => {setShowDeleteModal(true); setRef(reservation.ref)}}><i className="fa-solid fa-trash"></i></button>
+                </div>
             </div>
             <ConfirmDelete
                 nom={client.nom + " " + client.prenoms}
