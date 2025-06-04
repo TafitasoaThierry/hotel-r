@@ -14,7 +14,7 @@ export default function Client() {
     }, [])
     return (
         <div className="client-container">
-            <h1>Listes client</h1>
+            <h1>Listes de client: {clientList.length}</h1>
             <table className="table">
                 <thead>
                     <tr>
@@ -36,11 +36,11 @@ export default function Client() {
 function ListClient({client}: any) {
     return (
         <tr>
-            <td>client.numeroCl</td>
-            <td>client.nom</td>
-            <td>client.prenoms</td>
-            <td>client.tel</td>
-            <td>client.email</td>
+            <td>{client.numeroClient}</td>
+            <td>{client.nom}</td>
+            <td>{client.prenoms}</td>
+            <td>{client.tel}</td>
+            <td>{client.email}</td>
         </tr>
     );
 }
