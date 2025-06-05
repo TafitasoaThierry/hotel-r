@@ -41,13 +41,18 @@ function Reservation() {
 
     useEffect(() => {
         const reservation = new ReservationObj();
+        reservation.obtenirListeReservation()
+        .then((response) => {
+            effectif(response.data);
+            setReservationList(response.data);
+        })
+
         setInterval(() => {
             reservation.obtenirListeReservation()
             .then((response) => {
                 effectif(response.data);
                 setReservationList(response.data);
             })
-            .catch((e) => console.log(e))
         }, 1000)
     }, [])
 

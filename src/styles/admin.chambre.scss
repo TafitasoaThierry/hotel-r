@@ -1,0 +1,100 @@
+@use "ths.scss";
+
+$col1: #ffffff;
+$col2: #0e85b4;
+$col3: #08ac08;
+$col4: #e0e0e0;
+$transition: all 0.3s;
+$border: 8px;
+$px: 8px;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.chambre-container {
+    @include ths.flex(column, center, center);
+
+    .counter {
+        @include ths.flex();
+        gap: 1rem;
+
+        .box {
+            border: 1px solid black;
+            padding: $px * 2;
+        }
+    }
+    .box-container {
+        @include ths.flex();
+        gap: 1rem;
+        flex-wrap: wrap;
+        .box {
+            padding: $px;
+            border: 1px solid black;
+        }
+    }
+    .ajouter {
+        @include ths.flex();
+        background-image: linear-gradient(to bottom right, $col2, rgba(0, 0, 255, 0.808));
+        color: $col1;
+        box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.5);
+        border-radius: $border * 4;
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+        position: fixed;
+        right: $px * 4;
+        bottom: $px * 4;
+        transition: $transition;
+    }
+    .ajouter:hover {
+        transform: scale(1.1);
+    }
+    .form-container {
+        @include ths.flex(column, center, center);
+        gap: 1rem;
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1;
+        backdrop-filter: blur($px);
+
+        .form {
+            padding: ($px * 2);
+            margin: $px;
+            box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.5);
+            border-radius: $border * 2;
+            background-color: $col1;
+            width: 300px;
+            animation: addModal 0.3s;
+
+            .form-group {
+                margin: 0px $px;
+
+                .form-control {
+                    border-radius: 0px;
+                    margin: $px auto;
+                }
+                button {
+                    background-color: $col2;
+                    color: $col1;
+                    width: 100%;
+                }
+                .cancel {
+                    border: 1px solid $col2;
+                    color: $col2;
+                    background-color: $col1;
+                }
+            }
+        }
+        @keyframes addModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    }
+}
