@@ -14,6 +14,14 @@ $px: 8px;
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: Kugile;
+    src: url('../assets/fonts/Kugile_Demo.ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: fallback;
+}
+
 .chambre-container {
     @include ths.flex(column, center, center);
 
@@ -22,17 +30,51 @@ $px: 8px;
         gap: 1rem;
 
         .box {
-            border: 1px solid black;
+            // border: 1px solid black;
+            border-radius: $border * 2;
+            background-image: linear-gradient(to bottom right, rgba($color: $col2, $alpha: 1), $col1);
+            box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.5);
+            color: $col1;
             padding: $px * 2;
+            width: 200px;
         }
     }
     .box-container {
         @include ths.flex();
         gap: 1rem;
         flex-wrap: wrap;
+        padding: ($px * 2) 0;
+
         .box {
-            padding: $px;
-            border: 1px solid black;
+            width: 180px;
+            height: 220px;
+            padding: $px * 2;
+            border: 1px solid rgba($color: #000000, $alpha: 0.2);
+            box-shadow: 1px 1px 5px 1px rgba($color: #000000, $alpha: 0.5);
+            background-image: linear-gradient(to bottom right, rgba($color: $col2, $alpha: 0.1), rgba($color: $col2, $alpha: 0.1));
+
+            .numeroChambre {
+                font-family: Kugile;
+                padding: $px;
+                text-align: center;
+                box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.5);
+            }
+            .btn {
+                border: none;
+            }
+            // .update-chambre {
+            //     color: green;
+            // }
+            .delete-chambre {
+                color: red;
+                border: 1px solid transparent;
+                border-radius: $border * 4;
+                transition: $transition;
+            }
+            .delete-chambre:hover {
+                transform: scale(1.1);
+                border: 1px solid red;
+            }
         }
     }
     .ajouter {
@@ -51,6 +93,7 @@ $px: 8px;
     }
     .ajouter:hover {
         transform: scale(1.1);
+        box-shadow: 1px 1px 200px 50px rgba($color: $col2, $alpha: 0.8);
     }
     .form-container {
         @include ths.flex(column, center, center);
@@ -70,7 +113,7 @@ $px: 8px;
             box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.5);
             border-radius: $border * 2;
             background-color: $col1;
-            width: 300px;
+            width: 400px;
             animation: addModal 0.3s;
 
             .form-group {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../styles/admin.chambre.scss";
+import "../../styles/admin.dashboard.scss";
 import ChambreObj from "../../fetch/chambre";
 
 export default function Chambre() {
@@ -62,11 +63,47 @@ export default function Chambre() {
 }
 
 function ListeChambre ({chambre}: any) {
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    function supprimer() {
+        setShowDeleteModal(true);
+    }
     return (
         <div className="box">
-            <h5>{chambre.numero}</h5>
-            <p>{chambre.status}</p>
+            <h5 className="numeroChambre">{chambre.numero}</h5>
+            <p>{ chambre.status == "libre" ? <i className="fa-solid fa-unlock"></i> : <i className="fa-solid fa-lock"></i> } {chambre.status}</p>
             <p>{chambre.type}</p>
+            <button className="btn delete-chambre" onClick={() => supprimer()}><i className="fa-solid fa-trash"></i></button>
+            <button className="btn update-chambre"><i className="fa-solid fa-edit"></i></button>
+            <ConfirmDelete
+                numero={chambre.numero}
+                showDeleteModal={showDeleteModal}
+                setShowDeleteModal={setShowDeleteModal}
+            />
+        </div>
+    );
+}
+
+function ConfirmDelete({numero, showDeleteModal, setShowDeleteModal} : any) {
+    const remove = () => {
+        const chambre = new ChambreObj();
+        chambre.supprimerChambre(numero)
+        .then((response) => console.log(response.data))
+        setShowDeleteModal(false);
+    }
+
+    return (
+        <div className="confirm-delete" style={{ display: showDeleteModal == true ? "flex" : "none" }}>
+            <div className="delete-modal">
+                <i className="fa-solid fa-trash delete-modal-icon"></i>
+                <h4>Supprimer une chambre</h4>
+                <p>La suppression est irréversible</p>
+                <p>Chambre {numero}</p>
+                <div className="control-btn">
+                    <button className="btn cancel-btn" onClick={() => setShowDeleteModal(false)}><i className="fa-solid fa-cancel"></i> Annuler</button>
+                    <button className="btn delete-btn" onClick={remove}><i className="fa-solid fa-trash"></i> Supprimer</button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -74,7 +111,7 @@ function ListeChambre ({chambre}: any) {
 function AjouterChambre({showAddChambreModal, setShowAddChambreModal, listeChambre}: any) {
     const [chambre, setChambre] = useState({
         numero: "",
-        type: "classique",
+        type: "Classique",
         status: "libre",
         prix: 0
     });
@@ -121,6 +158,7 @@ function AjouterChambre({showAddChambreModal, setShowAddChambreModal, listeChamb
     return (
         <div className="form-container" style={{ display: showAddChambreModal == true ? "flex" : "none" }}>
             <div className="form">
+                <h3 style={{ textAlign: "center", padding: "16px" }}>Ajouter une chambre</h3>
                 <div className="form-group">
                     <label>Numero de chambre</label>
                     <input type="text" value={chambre.numero} onChange={(e) => check(e.target.value)} maxLength={4} placeholder="Numero de chambre" className="form-control"/>
