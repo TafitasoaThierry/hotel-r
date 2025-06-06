@@ -71,19 +71,6 @@ function Creation({ setShowConnexion, setDisplaySuccessMessage }: any) {
         let correct:string = "";
         let n:number = nom.length;
 
-        /** // eliminer les nombres seulement
-         * 
-         *  for(let character of nom) {
-                if((parseInt(character)) || (character == '0')) { 
-                    nom = nom.replace(character, ''); // remplacer les nombres par ''
-                    type == "nom" ? setNomInfo("inline") : setPrenomsInfo("inline");
-                }else {
-                    correct = correct + character;
-                    type == "nom" ? setNomInfo("none") : setPrenomsInfo("none");
-                }
-            }
-         */
-
         // eliminer les nombres et les caractères speciaux
         for(let i:number = 0; i < n; i++) {
             if(
@@ -285,13 +272,11 @@ function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
     function validateForm() {
         setValiderLabel("...");
         setTimeout(() => {
-            // alert(`mdp = ${mdp} and confirm = ${confirmation}`);
             sendMdp(mdp); // joker ty => setMpd
 
             // clear form
             setMdp("");
             setConfirmation("");
-            
             // hide all error message
             setShowMdpInfo("none");
             setShowConfirmationInfo("none");
@@ -370,7 +355,6 @@ function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) 
                                const data = emailFound.data;
                                for(const elem of data) {
                                    if(elem.mdp == mdp) { // correct mdp with email entered
-                                       // alert("Correct email")// correct mdp with email entered
                                        setIsCorrect({ telEmail: isCorrect.telEmail, mdp: "none" });
                                        connect(elem);
                                        break;
@@ -429,9 +413,7 @@ function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) 
         setCurrent("Réservation");
         localStorage.setItem("user", JSON.stringify(user));
 
-        // redirigena vers link reservation mampiasa window.location
-        // /auth = 5 donc current url moins 5 plus "/reservation"
-        // alert(window.location.toString().slice(0, (window.location.toString().length - 4)) + "reservation");
+        // rediriger vers link reservation
         window.location.replace(window.location.toString().slice(0, (window.location.toString().length - 4)) + "reservation");
     }
 
