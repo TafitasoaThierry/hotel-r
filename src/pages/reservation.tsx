@@ -35,8 +35,6 @@ export default function Reservation() {
                 return { ... previousState, numeroClient: JSON.parse(user).numeroClient }
             });
             // console.log("numCLI: " + JSON.parse(user).numeroClient);
-            // console.log("type: " + JSON.parse(user).type);
-            // console.log("isConnected: " + JSON.parse(user).isConnected);
         }else {
             console.log("NOT_CONNECTED");
         }

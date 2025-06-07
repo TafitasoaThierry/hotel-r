@@ -42,12 +42,10 @@ function Creation({ setShowConnexion, setDisplaySuccessMessage }: any) {
     }, [client.mdp])
 
     function inscrire() {
-        // console.log("mdp = " + mdp);
         // console.log("client = " + JSON.stringify(client));
         const newclient = new Client();
         newclient.creerCompte(client)
             .then((response) => { 
-                // console.log(response);
                 console.log("create new client with status " + response.status);
                 setDisplaySuccessMessage("flex");
                 setClient({ // clear form input
@@ -186,7 +184,6 @@ function Creation({ setShowConnexion, setDisplaySuccessMessage }: any) {
                     <h3 style={ { textAlign: "center" } }>Inscription</h3>
                     <div className="form-group">
                         <label>Nom</label>
-                        {/* or using a spread operator to update each propertie of client object, @ fo tsy miangatra */}
                         <input type="text" className="form-control" maxLength={80} value={ client.nom } onChange={ (e) => checkNom(e.target.value) } placeholder="Nom" />
                         <p style={ { color: "green", display: nomInfo } }><small>Ne doit pas contient des caractères spéciaux ou nombres</small></p>
                     </div>
@@ -263,7 +260,7 @@ function ConfirmMdp({ sendMdp, showConfirmMdp, setShowConfirmMdp }: any) {
     }
 
     function isCorrect() {
-        if((mdp == confirmation) && (mdp.length >= 8)) { // ampiasaina ny inverse i.e ra egale de false de ra !egale de true
+        if((mdp == confirmation) && (mdp.length >= 8)) {
             return false;
         }
         return true;
