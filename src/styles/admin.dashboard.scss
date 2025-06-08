@@ -105,12 +105,10 @@ $px: 8px;
                 padding: $px * 2;
 
                 .chambre {
-                    // background-color: rgba($color: $col3, $alpha: 0.2);
                     padding: $px;
                     border-radius: $border;
                 }
                 .personne {
-                    // background-color: rgba($color: $col3, $alpha: 0.2);
                     padding: $px;
                     border-radius: $border;
                 }
@@ -126,6 +124,7 @@ $px: 8px;
                         gap: 1rem;
                         border-left: 1px solid rgba($color: #000000, $alpha: 0.5);
                         padding: 0px $px * 2;
+
                         .crud-btn {
                             border: none;
                             border-radius: $border;

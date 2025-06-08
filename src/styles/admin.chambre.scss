@@ -30,7 +30,6 @@ $px: 8px;
         gap: 1rem;
 
         .box {
-            // border: 1px solid black;
             border-radius: $border * 2;
             background-image: linear-gradient(to bottom right, rgba($color: $col2, $alpha: 1), $col1);
             box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.5);

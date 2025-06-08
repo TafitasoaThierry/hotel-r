@@ -115,10 +115,6 @@ font-face {
     border-radius: $px*4;
 }
 
-// @media screen  {
-//
-// }
-
 .errorMsg::after, .infoMsg::after {
     content: " ";
     position: absolute;
@@ -245,6 +241,7 @@ font-face {
     @media screen and (max-width: 460px) {
         .form {
             padding: $px * 2;
+
             .form-group {
                 margin: 0px;
                 @include ths.flex(column, start, start);
@@ -270,6 +267,7 @@ font-face {
         overflow-x: scroll;
         gap: 1rem;
         position: absolute;
+        
         .image {
             width: auto;
             height: 90vh;

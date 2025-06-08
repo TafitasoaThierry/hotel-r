@@ -512,6 +512,7 @@ $tr: 0.3s;
         .deconnecter-modal {
             padding: $px;
             width: 100%;
+            
             .body {
                 font-size: 14px;
             }
@@ -543,6 +544,7 @@ $tr: 0.3s;
     position: fixed;
     right: $px * 5;
     bottom: $px * 5;
+
     .fa-history {
         border: 1px solid $col2;
         font-size: 30px;
