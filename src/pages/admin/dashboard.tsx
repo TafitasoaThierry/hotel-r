@@ -193,3 +193,9 @@ function ConfirmDelete({nom, showDeleteModal, setShowDeleteModal, setConfirmRemo
         </div>
     );
 }
+
+function Connexion() {
+    return (
+        <h1><i className="fa-solid fa-sign-in"></i> Se connecter</h1>
+    );
+}
