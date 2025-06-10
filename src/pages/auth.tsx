@@ -409,8 +409,6 @@ function Connexion({ setShowConnexion, setCurrent, setDisplayUserStatus }: any) 
         setDisplayUserStatus("block");
         setCurrent("Réservation");
         localStorage.setItem("user", JSON.stringify(user));
-
-        // rediriger vers link reservation
         window.location.replace(window.location.toString().slice(0, (window.location.toString().length - 4)) + "reservation");
     }
 

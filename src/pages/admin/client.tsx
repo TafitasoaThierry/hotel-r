@@ -12,6 +12,7 @@ export default function Client() {
             console.log(client);
         })
     }, [])
+    
     return (
         <div className="client-container">
             <h1>Listes de client: {clientList.length}</h1>

@@ -178,6 +178,7 @@ function ConfirmDelete({nom, showDeleteModal, setShowDeleteModal, setConfirmRemo
         setConfirmRemove(true);
         setShowDeleteModal(false);
     }
+    
     return (
         <div className="confirm-delete" style={{ display: showDeleteModal == true ? "flex" : "none" }}>
             <div className="delete-modal">

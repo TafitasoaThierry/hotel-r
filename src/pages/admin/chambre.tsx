@@ -68,6 +68,7 @@ function ListeChambre ({chambre}: any) {
     function supprimer() {
         setShowDeleteModal(true);
     }
+
     return (
         <div className="box">
             <h5 className="numeroChambre">{chambre.numero}</h5>
@@ -155,6 +156,7 @@ function AjouterChambre({showAddChambreModal, setShowAddChambreModal, listeChamb
             prix: 0
         })
     }
+    
     return (
         <div className="form-container" style={{ display: showAddChambreModal == true ? "flex" : "none" }}>
             <div className="form">
