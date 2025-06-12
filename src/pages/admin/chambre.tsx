@@ -18,7 +18,6 @@ export default function Chambre() {
         .then((response) => {
             setListeChambre(response.data);
         })
-        
         setInterval(() => {
             chambre.obtenirListeChambre()
             .then((response) => {
@@ -145,7 +144,6 @@ function AjouterChambre({showAddChambreModal, setShowAddChambreModal, listeChamb
             setShowAddChambreModal(false);
             clear();
         })
-        // console.log(chambre);
     }
     
     function clear() {
